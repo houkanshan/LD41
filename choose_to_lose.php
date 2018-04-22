@@ -12,8 +12,8 @@ $comment = str_replace("\n", " ", $_POST["comment"]);
 if ($id && $comment) {
   try {
     update_user($ip, $id, STATE_LOSING, $comment);
-    file_put_contents(FILE_COMMENTS, $id.",".$comment.PHP_EOL, FILE_APPEND | LOCK_EX);
-    echo "$id,$comment";
+    file_put_contents(FILE_COMMENTS, $ip.",".$comment.PHP_EOL, FILE_APPEND | LOCK_EX);
+    echo "$ip,$comment";
   } catch (Exception $e) {
     header(':', true, 500);
   }

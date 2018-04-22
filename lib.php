@@ -11,7 +11,6 @@ function get_ip() {
   // Parse
   $addr = $_SERVER['REMOTE_ADDR'];
   $addr_bin = inet_pton($addr);
-  echo strlen($addr_bin);
   if( $addr_bin === FALSE ) {
     // Unparsable? How did they connect?!?
     die('Invalid IP address');

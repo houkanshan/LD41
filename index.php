@@ -36,11 +36,8 @@ $user_id = get_id_by_ip($ip);
 
   <p id="last-comments-wrapper"></p>
 
-  <form class="post-form">
-    <div class="comment-wrapper">
-      <input type="text" name="comment" placeholder="Leave your message here" autocomplete="off" maxlength="143">
-    </div>
-  </form>
+  <div id="textarea"></div>
+
   <div class="preload">
     <img src="dist/pics/title1.png?v=2" alt="">
     <img src="dist/pics/title2.png?v=2" alt="">
