@@ -2,6 +2,8 @@
 include "base.php";
 $ip = get_ip();
 $id = get_id_by_ip($ip);
+$totals = get_totals();
+$last_winner = get_last_winner();
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +14,9 @@ $id = get_id_by_ip($ip);
 </head>
 <body>
   <p>Your ip: <?php echo $ip ?></p>
+  <p>Total: <?php echo $totals[0] ?></p>
+  <p>Total winner: <?php echo $totals[1] ?></p>
+  <p>Last winner: <?php echo $last_winner[0] ?> at <?php echo date(DATE_RFC2822, $last_winner[1]) ?></p>
 
   <p>Your state: <?php echo join(',', get_or_create_user_info($ip)); ?></p>
 

@@ -10369,7 +10369,7 @@ __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function () {
 var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-lose'),
     onChange: function () { },
-    maxLength: 2
+    maxLength: 255
 });
 textareaLose.render();
 __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose').click(function () {

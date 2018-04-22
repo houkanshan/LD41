@@ -40,7 +40,7 @@ $('#btn-win').click(function() {
 const textareaLose = new Textarea({
   el: $('#textarea-lose'),
   onChange: function() {},
-  maxLength: 2,
+  maxLength: 255,
 })
 textareaLose.render()
 
