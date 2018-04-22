@@ -4,6 +4,7 @@ import Textarea from './textarea'
 const doc = $(document)
 const win = $(window)
 
+// Win
 const text = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   'Curabitur egestas, elit sit amet tristique consequat, ',
@@ -31,9 +32,23 @@ const textareaWin = new Textarea({
 })
 textareaWin.render()
 
+$('#btn-win').click(function() {
+  $.ajax('./choose_to_win')
+})
+
+// Lose
 const textareaLose = new Textarea({
   el: $('#textarea-lose'),
   onChange: function() {},
   maxLength: 2,
 })
 textareaLose.render()
+
+$('#btn-lose').click(function() {
+  $.ajax('./choose_to_lose', {
+    type: 'POST',
+    data: {
+      comment: textareaLose.value
+    },
+  })
+})

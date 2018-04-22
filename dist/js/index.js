@@ -10363,12 +10363,23 @@ var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]
     hint: getOrigin(0)
 });
 textareaWin.render();
+__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function () {
+    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win');
+});
 var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-lose'),
     onChange: function () { },
     maxLength: 2
 });
 textareaLose.render();
+__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose').click(function () {
+    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_lose', {
+        type: 'POST',
+        data: {
+            comment: textareaLose.value
+        }
+    });
+});
 
 
 /***/ }),

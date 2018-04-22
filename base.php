@@ -106,6 +106,24 @@ function update_user($ip, $id, $state, $comment) {
   return file_put_contents($file_user, "$id,$state,$comment", LOCK_EX);
 }
 
+function choose_to_win($ip) {
+  $user_info = get_or_create_user_info($ip);
+  $id = $user_info[0];
+  $state = $user_info[1];
+  if ($state == 0) {
+    update_user($ip, $id, STATE_WINNING, '');
+  }
+}
+function choose_to_lose($ip, $comment) {
+  $user_info = get_or_create_user_info($ip);
+  $id = $user_info[0];
+  $state = $user_info[1];
+  if ($state == 0) {
+    update_user($ip, $id, STATE_LOSE, $comment);
+    file_put_contents(FILE_COMMENTS, $ip.",".$comment.PHP_EOL, FILE_APPEND | LOCK_EX);
+  }
+}
+
 function write_log($log) {
    file_put_contents(FILE_LOG, $log."\n",  FILE_APPEND | LOCK_EX);
 }

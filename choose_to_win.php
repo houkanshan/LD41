@@ -9,7 +9,7 @@ $id = get_id_by_ip($ip);
 
 if ($id) {
   try {
-    update_user($ip, $id, STATE_WINNING, '');
+    choose_to_win($ip);
     echo "$id";
   } catch (Exception $e) {
     header(':', true, 500);

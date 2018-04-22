@@ -32,13 +32,13 @@ $user_id = get_id_by_ip($ip);
     <section>
       <p>Choose to win:</p>
       <div id="textarea-win" class='textarea'></div>
-      <button type="button">Win</button>
+      <button type="button" id="btn-win">Win</button>
     </section>
 
     <section>
       <p>Choose to lose:</p>
       <div id="textarea-lose" class='textarea'></div>
-      <button type="button">Win</button>
+      <button type="button" id="btn-lose">Lose</button>
     </section>
   </div>
 
