@@ -25,11 +25,9 @@ function get_ip() {
   // if( substr($addr_bin, 0, strlen($v4mapped_prefix_bin)) == $v4mapped_prefix_bin) {
   if (strlen($addr_bin) === 16) {
     // Strip prefix
-    $ipv4 = substr($addr_bin, strlen($v4mapped_prefix_bin));
+    $addr_bin = substr($addr_bin, strlen($v4mapped_prefix_bin));
   }
-
-  // Convert back to printable address in canonical form
-  return inet_ntop($ipv4);
+  return inet_ntop($addr_bin);
 }
 
 ?>
