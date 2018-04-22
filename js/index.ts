@@ -28,15 +28,19 @@ function renderTextarea(textarea, input) {
   const inputLen = input.length
   const originLen = origin.length
   for (let i = 0; i < originLen; i++) {
+    let char = ''
     if (i < inputLen) {
       if (input[i] === origin[i]) {
-        html += input[i]
+        char = input[i]
       } else {
-        html += `<b>${input[i]}</b>`
+        char = `<b>${input[i]}</b>`
       }
+    } else if (i === inputLen) {
+      char = `<i class="cursor">${origin[i]}</i>`
     } else {
-      html += `<i>${origin[i]}</i>`
+      char = `<i>${origin[i]}</i>`
     }
+    html += char
   }
   textarea[0].innerHTML = html
 }
@@ -49,7 +53,7 @@ doc.on('keydown', function(e) {
   const isDelete = keyCode === backspaceCode
   if (isDelete) {
     userText = userText.slice(0, -1)
-  } else if (/^[0-9a-zA-Z+,/\-\\:;"',.?!@#$%^&*()\[\]{}<>|_+~`]$/.test(key)) {
+  } else if (/^[0-9a-zA-Z+,/\-\\:;"',.?!@#$%^&*()\[\]{}<>|_+~` ]$/.test(key)) {
     userText += key
   }
 

@@ -10360,17 +10360,22 @@ function renderTextarea(textarea, input) {
     var inputLen = input.length;
     var originLen = origin.length;
     for (var i = 0; i < originLen; i++) {
+        var char = '';
         if (i < inputLen) {
             if (input[i] === origin[i]) {
-                html += input[i];
+                char = input[i];
             }
             else {
-                html += "<b>" + input[i] + "</b>";
+                char = "<b>" + input[i] + "</b>";
             }
         }
-        else {
-            html += "<i>" + origin[i] + "</i>";
+        else if (i === inputLen) {
+            char = "<i class=\"cursor\">" + origin[i] + "</i>";
         }
+        else {
+            char = "<i>" + origin[i] + "</i>";
+        }
+        html += char;
     }
     textarea[0].innerHTML = html;
 }
@@ -10383,7 +10388,7 @@ doc.on('keydown', function (e) {
     if (isDelete) {
         userText = userText.slice(0, -1);
     }
-    else if (/^[0-9a-zA-Z+,/\-\\:;"',.?!@#$%^&*()\[\]{}<>|_+~`]$/.test(key)) {
+    else if (/^[0-9a-zA-Z+,/\-\\:;"',.?!@#$%^&*()\[\]{}<>|_+~` ]$/.test(key)) {
         userText += key;
     }
     renderTextarea(textarea, userText);

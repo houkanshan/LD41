@@ -1,12 +1,26 @@
+@require './variables'
+
 body
-  background: black
-  color: white
+  background: $screenBg
+  color: $screenText
 
 #textarea
   font-family: monospace
   b
     font-weight: normal
-    color: red
+    color: $wrongText
   i
     font-style: normal
-    color: gray
+    color: $hintText
+  .cursor
+    background: $screenBg
+    color: $screenText
+    animation: 1s blink step-end infinite
+
+@keyframes "blink"
+  from, to
+    background: $screenText
+    color: $screenBg
+  50%
+    background: $screenBg
+    color: $hintText
