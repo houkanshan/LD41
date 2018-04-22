@@ -4,7 +4,7 @@ include "base.php";
 
 header("Access-Control-Allow-Origin: *");
 
-$ip = $_SERVER['REMOTE_ADDR'];
+$ip = get_ip();
 $id = get_id_by_ip($ip);
 
 $comment = str_replace("\n", " ", $_POST["comment"]);

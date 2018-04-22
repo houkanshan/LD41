@@ -1,6 +1,6 @@
 <?php
 include "base.php";
-$ip = $_SERVER['REMOTE_ADDR'];
+$ip = get_ip();
 $id = get_id_by_ip($ip);
 ?>
 
@@ -11,6 +11,7 @@ $id = get_id_by_ip($ip);
   <title>LD41</title>
 </head>
 <body>
+  <p>Your ip: <?php echo $ip ?></p>
 
   <p>Your state: <?php echo join(',', get_or_create_user_info($ip)); ?></p>
 

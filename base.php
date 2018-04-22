@@ -1,4 +1,5 @@
 <?php
+include "lib.php";
 
 define("FILE_LOG", "data/log.txt");
 define("FILE_GLOBAL_ID", "data/global_id.txt");
@@ -12,6 +13,7 @@ define("STATE_LOSING", 2);
 
 
 date_default_timezone_set('UTC');
+
 
 function safe_get_contents($filename) {
   $res = file_get_contents($filename);

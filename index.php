@@ -2,7 +2,7 @@
 
 <?php
 define("VERSION", 1);
-$ip = $_SERVER['REMOTE_ADDR'];
+$ip = get_ip();
 $user_id = get_id_by_ip($ip);
 ?>
 
