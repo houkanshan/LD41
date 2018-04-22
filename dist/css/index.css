@@ -1,41 +1,47 @@
 body {
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
 }
-#textarea {
+.textarea {
   font-family: monospace;
+  border: 1px solid;
+  padding: 6px 8px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 12px;
+  min-height: 48px;
 }
-#textarea b {
+.textarea b {
   font-weight: normal;
   color: #f00;
 }
-#textarea i {
+.textarea i {
   font-style: normal;
   color: #808080;
 }
-#textarea .cursor {
-  background: #000;
-  color: #fff;
+.textarea.focused .cursor {
+  background: #fff;
+  color: #000;
   -webkit-animation: 1s blink step-end infinite;
           animation: 1s blink step-end infinite;
 }
 @-webkit-keyframes "blink" {
   from, to {
-    background: #fff;
-    color: #000;
+    background: #000;
+    color: #fff;
   }
   50% {
-    background: #000;
+    background: #fff;
     color: #808080;
   }
 }
 @keyframes "blink" {
   from, to {
-    background: #fff;
-    color: #000;
+    background: #000;
+    color: #fff;
   }
   50% {
-    background: #000;
+    background: #fff;
     color: #808080;
   }
 }

@@ -10334,10 +10334,11 @@ return jQuery;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__textarea__ = __webpack_require__(2);
+
 
 var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
 var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
-var textarea = __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea');
 var text = [
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     'Curabitur egestas, elit sit amet tristique consequat, ',
@@ -10354,46 +10355,132 @@ function getOrigin(len) {
     }
     return text.join('');
 }
-function renderTextarea(textarea, input) {
-    var html = '';
-    var origin = getOrigin(input.length);
-    var inputLen = input.length;
-    var originLen = origin.length;
-    for (var i = 0; i < originLen; i++) {
-        var char = '';
-        if (i < inputLen) {
-            if (input[i] === origin[i]) {
-                char = input[i];
-            }
-            else {
-                char = "<b>" + input[i] + "</b>";
-            }
-        }
-        else if (i === inputLen) {
-            char = "<i class=\"cursor\">" + origin[i] + "</i>";
-        }
-        else {
-            char = "<i>" + origin[i] + "</i>";
-        }
-        html += char;
-    }
-    textarea[0].innerHTML = html;
-}
+var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
+    el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-win'),
+    onChange: function (value) {
+        this.setHint(getOrigin(value.length));
+    },
+    hint: getOrigin(0)
+});
+textareaWin.render();
+var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
+    el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-lose'),
+    onChange: function () { },
+    maxLength: 2
+});
+textareaLose.render();
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
+var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
+var textareas = [];
 var backspaceCode = 8;
-var userText = '';
 doc.on('keydown', function (e) {
     var key = e.key;
     var keyCode = e.keyCode;
     var isDelete = keyCode === backspaceCode;
     if (isDelete) {
-        userText = userText.slice(0, -1);
+        textareas.forEach(function (textarea) {
+            textarea.handleDelete();
+        });
     }
     else if (/^[0-9a-zA-Z+,/\-\\:;"',.?!@#$%^&*()\[\]{}<>|_+~` ]$/.test(key)) {
-        userText += key;
+        textareas.forEach(function (textarea) {
+            textarea.handleInput(key);
+        });
     }
-    renderTextarea(textarea, userText);
 });
-renderTextarea(textarea, userText);
+var Textarea = (function () {
+    function Textarea(_a) {
+        var el = _a.el, onChange = _a.onChange, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.hint, hint = _c === void 0 ? '' : _c;
+        var _this = this;
+        this.el = el;
+        this.onChange = onChange;
+        this.maxLength = maxLength;
+        this.hint = hint;
+        this.value = '';
+        this.isFocused = false;
+        textareas.push(this);
+        doc.on('click', function (e) {
+            if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).closest(_this.el).length) {
+                _this.focus();
+            }
+            else {
+                _this.blur();
+            }
+        });
+    }
+    Textarea.prototype.setHint = function (text) {
+        this.hint = text;
+    };
+    Textarea.prototype.render = function () {
+        var html = '';
+        var input = this.value;
+        var origin = this.hint;
+        var inputLen = input.length;
+        var originLen = origin.length;
+        var len = Math.max(inputLen, originLen);
+        for (var i = 0; i < len; i++) {
+            var char = '';
+            if (i < inputLen) {
+                if (originLen === 0 || input[i] === origin[i]) {
+                    char = input[i];
+                }
+                else {
+                    char = "<b>" + input[i] + "</b>";
+                }
+            }
+            else if (i === inputLen) {
+                char = "<i class=\"cursor\">" + origin[i] + "</i>";
+            }
+            else {
+                char = "<i>" + origin[i] + "</i>";
+            }
+            html += char;
+        }
+        if (inputLen >= originLen) {
+            html += '<i class="cursor"> </i>';
+        }
+        this.el[0].innerHTML = html;
+    };
+    Textarea.prototype.handleInput = function (char) {
+        if (!this.isFocused) {
+            return;
+        }
+        this.value += char;
+        if (this.maxLength > 0) {
+            this.value = this.value.slice(0, this.maxLength);
+        }
+        this.onChange.call(this, this.value);
+        this.render();
+    };
+    Textarea.prototype.handleDelete = function () {
+        if (!this.isFocused) {
+            return;
+        }
+        this.value = this.value.slice(0, -1);
+        this.onChange.call(this, this.value);
+        this.render();
+    };
+    Textarea.prototype.focus = function () {
+        this.isFocused = true;
+        this.el.addClass('focused');
+    };
+    Textarea.prototype.blur = function () {
+        this.isFocused = false;
+        this.el.removeClass('focused');
+    };
+    return Textarea;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (Textarea);
 
 
 /***/ })

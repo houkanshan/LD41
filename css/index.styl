@@ -4,18 +4,25 @@ body
   background: $screenBg
   color: $screenText
 
-#textarea
+.textarea
   font-family: monospace
+  border: 1px solid
+  padding: 6px 8px
+  white-space: pre-wrap
+  word-break: break-all
+  font-size: 12px
+  min-height: 12px*4
   b
     font-weight: normal
     color: $wrongText
   i
     font-style: normal
     color: $hintText
-  .cursor
-    background: $screenBg
-    color: $screenText
-    animation: 1s blink step-end infinite
+  &.focused
+    .cursor
+      background: $screenBg
+      color: $screenText
+      animation: 1s blink step-end infinite
 
 @keyframes "blink"
   from, to

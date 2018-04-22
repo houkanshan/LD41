@@ -29,6 +29,17 @@ $user_id = get_id_by_ip($ip);
   </div>
 
   <div id="stage-main" class="stage">
+    <section>
+      <p>Choose to win:</p>
+      <div id="textarea-win" class='textarea'></div>
+      <button type="button">Win</button>
+    </section>
+
+    <section>
+      <p>Choose to lose:</p>
+      <div id="textarea-lose" class='textarea'></div>
+      <button type="button">Win</button>
+    </section>
   </div>
 
   <div id="stage-end" class="stage">
@@ -36,7 +47,6 @@ $user_id = get_id_by_ip($ip);
 
   <p id="last-comments-wrapper"></p>
 
-  <div id="textarea"></div>
 
   <div class="preload">
     <img src="dist/pics/title1.png?v=2" alt="">

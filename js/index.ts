@@ -1,8 +1,8 @@
 import * as $ from 'jquery'
+import Textarea from './textarea'
 
 const doc = $(document)
 const win = $(window)
-const textarea = $('#textarea')
 
 const text = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -22,42 +22,18 @@ function getOrigin(len) {
   return text.join('')
 }
 
-function renderTextarea(textarea, input) {
-  let html = ''
-  const origin = getOrigin(input.length)
-  const inputLen = input.length
-  const originLen = origin.length
-  for (let i = 0; i < originLen; i++) {
-    let char = ''
-    if (i < inputLen) {
-      if (input[i] === origin[i]) {
-        char = input[i]
-      } else {
-        char = `<b>${input[i]}</b>`
-      }
-    } else if (i === inputLen) {
-      char = `<i class="cursor">${origin[i]}</i>`
-    } else {
-      char = `<i>${origin[i]}</i>`
-    }
-    html += char
-  }
-  textarea[0].innerHTML = html
-}
-
-const backspaceCode = 8
-let userText = ''
-doc.on('keydown', function(e) {
-  const key = e.key
-  const keyCode = e.keyCode
-  const isDelete = keyCode === backspaceCode
-  if (isDelete) {
-    userText = userText.slice(0, -1)
-  } else if (/^[0-9a-zA-Z+,/\-\\:;"',.?!@#$%^&*()\[\]{}<>|_+~` ]$/.test(key)) {
-    userText += key
-  }
-
-  renderTextarea(textarea, userText)
+const textareaWin = new Textarea({
+  el: $('#textarea-win'),
+  onChange: function(value) {
+    this.setHint(getOrigin(value.length))
+  },
+  hint: getOrigin(0),
 })
+textareaWin.render()
 
-renderTextarea(textarea, userText)
+const textareaLose = new Textarea({
+  el: $('#textarea-lose'),
+  onChange: function() {},
+  maxLength: 2,
+})
+textareaLose.render()
