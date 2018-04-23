@@ -6,34 +6,46 @@ const win = $(window)
 
 // Win
 const text = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  'Curabitur egestas, elit sit amet tristique consequat, ',
-  'mauris est placerat metus, et fermentum ■orci ante sed odio.'
+  'I, as player ####, hereby proclaim that I want to win this game',
+  ', with full awareness of the fact that all games',
+  ' can essentially be divided into two mutually exclusive genres:',
+  ' the ones I want to win and the ones I don’t.',
+  ' This exact game, to me, applies to the former category.',
+  ' Hence, I once again clarify that the aforementioned decision is made out of free will',
+  ' as a voluntary act and deed,',
+  ' under no influence of any chemical substances',
+  ' or peer pressure,',
+  ' and without any duress or coercion of any form',
+  ' exerted by or on behalf of any other organization or individual.'
 ]
 const textLengthMap = text.reduce(function(acc, value) {
-  return acc + value.length
-}, 0)
+  const len = value.length
+  acc.push(acc.length ? acc[acc.length - 1] + len : len)
+  return acc
+}, [])
 
-function getOrigin(len) {
+function getOrigin(len) : string[] {
   for (let i = 0, ilen = text.length; i < ilen; i++) {
     if (textLengthMap[i] > len) {
-      return text.slice(0, i + 1).join('')
+      return text.slice(0, i + 1)
     }
   }
-  return text.join('')
+  return text
 }
 
 const textareaWin = new Textarea({
   el: $('#textarea-win'),
   onChange: function(value) {
-    this.setHint(getOrigin(value.length))
+    const texts = getOrigin(value.length)
+    this.el.toggleClass('is-expanded', texts.length > 1)
+    this.setHint(texts.join(''))
   },
-  hint: getOrigin(0),
+  hint: getOrigin(0).join(''),
 })
 textareaWin.render()
 
-$('#btn-win').click(function() {
-  $.ajax('./choose_to_win')
+$('#btn-win:not(:disabled)').click(function() {
+  $.ajax('./choose_to_win.php')
 })
 
 // Lose
@@ -44,8 +56,8 @@ const textareaLose = new Textarea({
 })
 textareaLose.render()
 
-$('#btn-lose').click(function() {
-  $.ajax('./choose_to_lose', {
+$('#btn-lose:not(:disabled)').click(function() {
+  $.ajax('./choose_to_lose.php', {
     type: 'POST',
     data: {
       comment: textareaLose.value

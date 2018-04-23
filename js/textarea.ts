@@ -64,7 +64,11 @@ class Textarea {
         if (originLen === 0 || input[i] === origin[i]) {
           char = input[i]
         } else {
-          char = `<b>${input[i]}</b>`
+          if (input[i] === ' ') {
+            char = `<b class='space'>${input[i]}</b>`
+          } else {
+            char = `<b>${input[i]}</b>`
+          }
         }
       } else if (i === inputLen) {
         char = `<i class="cursor">${origin[i]}</i>`

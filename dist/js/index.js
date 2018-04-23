@@ -10340,31 +10340,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
 var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
 var text = [
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    'Curabitur egestas, elit sit amet tristique consequat, ',
-    'mauris est placerat metus, et fermentum ■orci ante sed odio.'
+    'I, as player ####, hereby proclaim that I want to win this game',
+    ', with full awareness of the fact that all games',
+    ' can essentially be divided into two mutually exclusive genres:',
+    ' the ones I want to win and the ones I don’t.',
+    ' This exact game, to me, applies to the former category.',
+    ' Hence, I once again clarify that the aforementioned decision is made out of free will',
+    ' as a voluntary act and deed,',
+    ' under no influence of any chemical substances',
+    ' or peer pressure,',
+    ' and without any duress or coercion of any form',
+    ' exerted by or on behalf of any other organization or individual.'
 ];
 var textLengthMap = text.reduce(function (acc, value) {
-    return acc + value.length;
-}, 0);
+    var len = value.length;
+    acc.push(acc.length ? acc[acc.length - 1] + len : len);
+    return acc;
+}, []);
 function getOrigin(len) {
     for (var i = 0, ilen = text.length; i < ilen; i++) {
         if (textLengthMap[i] > len) {
-            return text.slice(0, i + 1).join('');
+            return text.slice(0, i + 1);
         }
     }
-    return text.join('');
+    return text;
 }
 var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-win'),
     onChange: function (value) {
-        this.setHint(getOrigin(value.length));
+        var texts = getOrigin(value.length);
+        this.el.toggleClass('is-expanded', texts.length > 1);
+        this.setHint(texts.join(''));
     },
-    hint: getOrigin(0)
+    hint: getOrigin(0).join('')
 });
 textareaWin.render();
-__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function () {
-    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win');
+__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win:not(:disabled)').click(function () {
+    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win.php');
 });
 var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-lose'),
@@ -10372,8 +10384,8 @@ var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */
     maxLength: 255
 });
 textareaLose.render();
-__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose').click(function () {
-    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_lose', {
+__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose:not(:disabled)').click(function () {
+    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_lose.php', {
         type: 'POST',
         data: {
             comment: textareaLose.value
@@ -10446,7 +10458,12 @@ var Textarea = (function () {
                     char = input[i];
                 }
                 else {
-                    char = "<b>" + input[i] + "</b>";
+                    if (input[i] === ' ') {
+                        char = "<b class='space'>" + input[i] + "</b>";
+                    }
+                    else {
+                        char = "<b>" + input[i] + "</b>";
+                    }
                 }
             }
             else if (i === inputLen) {

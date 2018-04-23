@@ -121,7 +121,7 @@ function choose_to_win($ip) {
     file_add_one(FILE_TOTAL);
     file_add_one(FILE_TOTAL_WIN);
     $time = time();
-    file_put_contents(FILE_LAST_WIN, "$ip,$time", LOCK_EX);
+    file_put_contents(FILE_LAST_WIN, "$id,$ip,$time", LOCK_EX);
   }
 }
 function choose_to_lose($ip, $comment) {
@@ -131,7 +131,7 @@ function choose_to_lose($ip, $comment) {
   if ($state == 0) {
     update_user($ip, $id, STATE_LOSE, $comment);
     file_add_one(FILE_TOTAL);
-    file_put_contents(FILE_COMMENTS, $ip.",".$comment.PHP_EOL, FILE_APPEND | LOCK_EX);
+    file_put_contents(FILE_COMMENTS, "$id,$ip,$comment".PHP_EOL, FILE_APPEND | LOCK_EX);
   }
 }
 
@@ -143,10 +143,11 @@ function get_totals() {
 
 function get_last_winner() {
   $last_winner = safe_get_contents(FILE_LAST_WIN);
-  $last_winner = explode(",", trim($last_winner), 2);
-  $ip = $last_winner[0];
-  $time = intval($last_winner[1]);
-  return [$ip, $time];
+  $last_winner = explode(",", trim($last_winner), 3);
+  $id = $last_winner[0];
+  $ip = $last_winner[1];
+  $time = intval($last_winner[2]);
+  return [$id, $ip, $time];
 }
 
 function write_log($log) {

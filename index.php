@@ -2,8 +2,13 @@
 
 <?php
 define("VERSION", 1);
+
 $ip = get_ip();
-$user_id = get_id_by_ip($ip);
+$user_info = get_or_create_user_info($ip);
+$id = $user_info[0];
+$state = $user_info[1];
+$comment = $user_info[2];
+$is_active = $state == 0;
 ?>
 
 <!DOCTYPE html>
@@ -15,54 +20,55 @@ $user_id = get_id_by_ip($ip);
   <link rel="shortcut icon" href="http://serotoninphobia.info/favicon.ico"/>
   <meta name="viewport" content="user-scalable=no, width=540">
 </head>
-<body data-state="title">
+<body data-state="<?php echo $is_active ? 'active' : 'inactive' ?>">
+  <div class="banner"></div>
+  <table>
+    <tr class="section-win"><td>
+      <h1>Winning Condition</h1>
+      <p class="intro">Type the following line(s) to secure your win.</p>
+      <div id="textarea-win" class="textarea"></div>
 
-<div id="computer">
-<div id="screen-wrapper" class="crt-container">
-<div id="screen">
+      <div class="actions">
+        <button type="button" id="btn-win" <?php echo $is_active ? '' : 'disabled' ?>>
+          I’m ready to confirm my win.</button>
+      </div>
+    </td></tr>
+
+    <tr class="section-lose"><td>
+      <section class="section-billboard">
+        <p>
+          ANNOUNCEMENT: ### players have played this game so far,
+          among which ### players have won this game.
+          The latest win was achieved ## hours and ## mins ago.
+          Refresh the page to have the statistics updated.
+        </p>
+      </section>
+
+      <div class="section-lose-inner">
+        <p class="intro">
+          Alternatively. If win is not what you seek,
+          you can also write something here for the future win-seekers to see:
+        </p>
+        <div id="textarea-lose" class="textarea"></div>
+
+        <div class="actions">
+          <button type="button" id="btn-lose" <?php echo $is_active ? '' : 'disabled' ?>>
+            I’m confident this is what I’m intended to say.</button>
+        </div>
+      </div>
+    </td></tr>
+
+    <tr class="section-lose-comment"><td>
+      <section></section>
+      <section></section>
+    </td></tr>
 
 
-  <div id="stage-title" class="stage">
-  </div>
+  </table>
 
-  <div id="stage-login" class="stage">
-  </div>
-
-  <div id="stage-main" class="stage">
-    <section>
-      <p>Choose to win:</p>
-      <div id="textarea-win" class='textarea'></div>
-      <button type="button" id="btn-win">Win</button>
-    </section>
-
-    <section>
-      <p>Choose to lose:</p>
-      <div id="textarea-lose" class='textarea'></div>
-      <button type="button" id="btn-lose">Lose</button>
-    </section>
-  </div>
-
-  <div id="stage-end" class="stage">
-  </div>
-
-  <p id="last-comments-wrapper"></p>
-
-
-  <div class="preload">
-    <img src="dist/pics/title1.png?v=2" alt="">
-    <img src="dist/pics/title2.png?v=2" alt="">
-  </div>
 </div>
 </div>
 </div>
-
-<?php
-// a userId
-// b brithTime
-// c deathTime
-// d life
-// e canExtend
-?>
 
 <script>
   var Data = {
