@@ -48,7 +48,7 @@ $comments = get_last_comments(2);
     </td></tr>
 
     <tr class="section-lose"><td>
-      <section class="section-billboard">
+      <section id="section-billboard">
         <p>
           ANNOUNCEMENT: <?php echo $total?> players have played this game so far,
           among which <?php echo $total_winners?> players have won this game.

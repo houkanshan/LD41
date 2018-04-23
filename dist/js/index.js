@@ -10335,10 +10335,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__textarea__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__marquee__ = __webpack_require__(3);
+
 
 
 var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
 var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__marquee__["a" /* renderMarquee */])(__WEBPACK_IMPORTED_MODULE_0_jquery__('#section-billboard p'));
 var text = [
     '111111', '2222222'
 ];
@@ -10523,6 +10526,26 @@ var Textarea = (function () {
     return Textarea;
 }());
 /* harmony default export */ __webpack_exports__["a"] = (Textarea);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = renderMarquee;
+function renderMarquee(el) {
+    var width = el.outerWidth(true);
+    el.parent().append(el.clone());
+    var currLeft = 0;
+    debugger;
+    setTimeout(function next() {
+        el.css('margin-left', -currLeft);
+        currLeft += 1;
+        currLeft %= width;
+        setTimeout(next, 20);
+    }, 20);
+}
 
 
 /***/ })

@@ -1,9 +1,13 @@
 import * as $ from 'jquery'
 import Textarea from './textarea'
+import { renderMarquee } from './marquee'
 declare const Data: any;
 
 const doc = $(document)
 const win = $(window)
+
+// Billboard
+renderMarquee($('#section-billboard p'))
 
 // Win
 // const text = [

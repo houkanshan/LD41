@@ -1,5 +1,6 @@
 @import './normalize.css'
-@require './variables'
+@require './font'
+@import './variables'
 
 body
   background: $screenBg
@@ -27,10 +28,11 @@ label
   position: absolute
   top: 4px
   left: 4px
-  font: 12px 'Segoe Script', script
+  font: 12px 'Segoe Script', 'Segoe Print', script
   transform: scale(0.85)
   transform-origin: top left
   color: #929292
+  line-height: 1
 
 button
   display: inline-block
@@ -88,7 +90,7 @@ button
     text-align: left
 
 // section billboard
-.section-billboard
+#section-billboard
   background: #d1d1d1
   border-bottom: 1px solid $borderColor
   height: 21px
@@ -96,6 +98,9 @@ button
   overflow: hidden
   white-space: nowrap
   padding: 0 4px
+  p
+    margin-left: 40px
+    display: inline
 
 // section lose
 .section-lose-inner

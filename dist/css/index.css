@@ -426,6 +426,12 @@ template {
   display: none;
 }
 
+@font-face {
+  font-family: 'Segoe Print';
+  src: url("../fonts/segoepr.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   background: #fff;
   color: #000;
@@ -457,12 +463,13 @@ label {
   position: absolute;
   top: 4px;
   left: 4px;
-  font: 12px 'Segoe Script', script;
+  font: 12px 'Segoe Script', 'Segoe Print', script;
   -webkit-transform: scale(0.85);
           transform: scale(0.85);
   -webkit-transform-origin: top left;
           transform-origin: top left;
   color: #929292;
+  line-height: 1;
 }
 button {
   display: inline-block;
@@ -528,7 +535,7 @@ button[disabled] {
 #textarea-win.is-expanded {
   text-align: left;
 }
-.section-billboard {
+#section-billboard {
   background: #d1d1d1;
   border-bottom: 1px solid #333;
   height: 21px;
@@ -536,6 +543,10 @@ button[disabled] {
   overflow: hidden;
   white-space: nowrap;
   padding: 0 4px;
+}
+#section-billboard p {
+  margin-left: 40px;
+  display: inline;
 }
 .section-lose-inner {
   padding-top: 14px;
