@@ -451,6 +451,18 @@ tr {
 }
 td {
   padding: 0;
+  position: relative;
+}
+label {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font: 12px 'Segoe Script', script;
+  -webkit-transform: scale(0.85);
+          transform: scale(0.85);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  color: #929292;
 }
 button {
   display: inline-block;
@@ -527,12 +539,20 @@ button[disabled] {
 }
 .section-lose-inner {
   padding-top: 14px;
+  position: relative;
 }
 #textarea-lose {
   padding: 6px 8px;
   border: 1px solid #333;
   margin: 0 16px;
   font-size: 13px;
+}
+.section-lose-comment .comment {
+  padding: 20px 10px 4px;
+  position: relative;
+}
+.section-lose-comment .comment + .comment {
+  border-top: 1px solid #333;
 }
 @-webkit-keyframes marquee {
   from {

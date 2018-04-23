@@ -10340,21 +10340,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
 var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
 var text = [
-    'I, as player ####, hereby proclaim that I want to win this game',
-    ', with full awareness of the fact that all games',
-    ' can essentially be divided into two mutually exclusive genres:',
-    ' the ones I want to win and the ones I don’t.',
-    ' This exact game, to me, applies to the former category.',
-    ' Hence, I once again clarify that the aforementioned decision is made out of free will',
-    ' as a voluntary act and deed,',
-    ' under no influence of any chemical substances',
-    ' or peer pressure,',
-    ' and without any duress or coercion of any form',
-    ' exerted by or on behalf of any other organization or individual.'
+    '111111', '2222222'
 ];
 var textLengthMap = text.reduce(function (acc, value) {
     var len = value.length;
-    acc.push(acc.length ? acc[acc.length - 1] + len : len);
+    acc.push(acc.length ? acc[acc.length - 1] + len - 4 : len - 4);
     return acc;
 }, []);
 function getOrigin(len) {
@@ -10365,33 +10355,57 @@ function getOrigin(len) {
     }
     return text;
 }
+var btnWin = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win');
 var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-win'),
     onChange: function (value) {
         var texts = getOrigin(value.length);
         this.el.toggleClass('is-expanded', texts.length > 1);
         this.setHint(texts.join(''));
+        btnWin.prop('disabled', value !== this.hint);
     },
     hint: getOrigin(0).join('')
 });
 textareaWin.render();
-__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win:not(:disabled)').click(function () {
-    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win.php');
+__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function (e) {
+    if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).is(':disabled')) {
+        return;
+    }
+    if (!confirm('Is this your final choice?')) {
+        return;
+    }
+    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win.php').then(function () {
+        renderWin();
+    });
 });
+var btnLose = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose');
+var minLength = 20;
 var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-lose'),
-    onChange: function () { },
+    onChange: function (value) {
+        btnLose.prop('disabled', value.length < minLength);
+    },
     maxLength: 255
 });
 textareaLose.render();
-__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose:not(:disabled)').click(function () {
+__WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose').click(function (e) {
+    if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).is(':disabled')) {
+        return;
+    }
+    if (!confirm('Is this your final choice?')) {
+        return;
+    }
     __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_lose.php', {
         type: 'POST',
         data: {
             comment: textareaLose.value
         }
+    }).then(function () {
+        location.reload();
     });
 });
+function renderWin() {
+}
 
 
 /***/ }),

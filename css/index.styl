@@ -21,6 +21,16 @@ tr
   width: 683px
 td
   padding: 0
+  position: relative
+
+label
+  position: absolute
+  top: 4px
+  left: 4px
+  font: 12px 'Segoe Script', script
+  transform: scale(0.85)
+  transform-origin: top left
+  color: #929292
 
 button
   display: inline-block
@@ -90,11 +100,19 @@ button
 // section lose
 .section-lose-inner
   padding-top: 14px
+  position: relative
 #textarea-lose
   padding: 6px 8px
   border: 1px solid $borderColor
   margin: 0 16px
   font-size: 13px
+
+.section-lose-comment
+  .comment
+    padding: 20px 10px 4px
+    position: relative
+    & + .comment
+      border-top: 1px solid $borderColor
 
 @keyframes marquee
   from { transform: translateX(0%) }
