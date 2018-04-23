@@ -43,7 +43,7 @@ $comments = get_last_comments(2);
     <tr class="section-win"><td>
       <label>figure 1</label>
       <h1>Winning Condition</h1>
-      <p class="intro">Type the following line(s) to secure your win.</p>
+      <p class="intro">Type in the following line to secure your win.</p>
       <div id="textarea-win" class="textarea"></div>
 
       <div class="actions">
@@ -85,7 +85,7 @@ $comments = get_last_comments(2);
             I’m confident this is what I’m intended to say.</button>
         </div>
         <div class='end-overlay'>
-          <div class="message">Your Session Has Ended</div>
+          <div class="message">Your Session Has Expired</div>
         </div>
         <div class="win-overlay">
           <div class="message">
