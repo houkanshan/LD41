@@ -10417,7 +10417,7 @@ var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */
         var len = value.length;
         btnLose.prop('disabled', len < this.minLength || len > this.maxLength);
     },
-    minLength: 20,
+    minLength: 15,
     maxLength: 140
 });
 textareaLose.render();

@@ -567,13 +567,13 @@ button[disabled] {
   padding: 16px 16px 0;
 }
 .section-win h1 {
-  font-size: 36px;
+  font-size: 38px;
   line-height: 1;
   padding: 0;
   margin: 0;
 }
 #textarea-win {
-  font-size: 24px;
+  font-size: 20px;
 }
 #textarea-win.is-expanded {
   text-align: justify;
