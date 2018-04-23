@@ -34,7 +34,7 @@ $comments = get_last_comments(2);
 </head>
 <body data-state="<?php echo $is_active ? 'active' : 'inactive' ?>">
   <div class="banner">
-    <a href="http://lab.serotoninphobia.info/centrifuge/completeguide.html">
+    <a target="_blank" href="http://lab.serotoninphobia.info/centrifuge/completeguide.html">
       <img src="./pics/banner.png" width="683px" height="84px">
       </a>
     <div class="close"></div>
