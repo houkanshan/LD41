@@ -10418,7 +10418,7 @@ var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */
         btnLose.prop('disabled', len < this.minLength || len > this.maxLength);
     },
     minLength: 20,
-    maxLength: 255
+    maxLength: 140
 });
 textareaLose.render();
 __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose').click(function (e) {

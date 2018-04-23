@@ -92,7 +92,7 @@ const textareaLose = new Textarea({
     btnLose.prop('disabled', len < this.minLength || len > this.maxLength)
   },
   minLength: 20,
-  maxLength: 255,
+  maxLength: 140,
 })
 textareaLose.render()
 
