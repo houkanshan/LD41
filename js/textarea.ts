@@ -26,12 +26,14 @@ class Textarea {
   onChange: (string) => void
   hint: string
   value: string
+  minLength: number
   maxLength: number
   isFocused: boolean
 
-  constructor({ el, onChange, maxLength = 0, hint = '' }) {
+  constructor({ el, onChange, maxLength = 0, minLength = 0, hint = '' }) {
     this.el = el
     this.onChange = onChange
+    this.minLength = minLength
     this.maxLength = maxLength
     this.hint = hint
     this.value = ''
@@ -80,21 +82,29 @@ class Textarea {
     if (inputLen >= originLen) {
       html += '<i class="cursor"> </i>'
     }
-    this.el[0].innerHTML = html
+
+
+    let countHint = ''
+    if (inputLen < this.minLength) {
+      countHint = `<span class="count-hint">+${this.minLength - inputLen}</span>`
+    } else if (this.maxLength && inputLen > this.maxLength) {
+      countHint = `<span class="count-hint">-${inputLen - this.maxLength}</span>`
+    }
+
+    this.el[0].innerHTML = html + countHint
   }
 
   handleInput(char) {
     if (!this.isFocused) { return }
     this.value += char
-    if (this.maxLength > 0) {
-      this.value = this.value.slice(0, this.maxLength)
-    }
+    this.el.toggleClass('non-empty', this.value.length > 0)
     this.onChange.call(this, this.value)
     this.render()
   }
   handleDelete() {
     if (!this.isFocused) { return }
     this.value = this.value.slice(0, -1)
+    this.el.toggleClass('non-empty', this.value.length > 0)
     this.onChange.call(this, this.value)
     this.render()
   }

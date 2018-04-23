@@ -481,6 +481,11 @@ button {
   line-height: 17px;
   background: linear-gradient(0deg, #dedede 0%, #f6f6f6 100%);
   cursor: pointer;
+  outline: none;
+  padding: 0 20px;
+}
+button:active {
+  background: linear-gradient(0deg, #f6f6f6 0%, #dedede 100%);
 }
 button[disabled] {
   color: #999;
@@ -500,6 +505,7 @@ button[disabled] {
   word-break: break-word;
   font-size: 12px;
   min-height: 48px;
+  position: relative;
 }
 .textarea b {
   font-weight: normal;
@@ -512,11 +518,22 @@ button[disabled] {
   font-style: normal;
   color: #b9b9b9;
 }
+.textarea .count-hint {
+  display: none;
+}
 .textarea.focused .cursor {
   background: #fff;
   color: #000;
   -webkit-animation: 1s blink step-end infinite;
           animation: 1s blink step-end infinite;
+}
+.textarea.focused .count-hint,
+.textarea.non-empty .count-hint {
+  display: block;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  color: #f00;
 }
 .section-win {
   text-align: center;

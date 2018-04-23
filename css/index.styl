@@ -44,6 +44,11 @@ button
   line-height: 17px
   background: linear-gradient(0deg, rgb(222,222,222) 0%, rgb(246,246,246) 100%)
   cursor: pointer
+  outline: none
+  padding: 0 20px
+  &:active
+    background: linear-gradient(0deg, rgb(246,246,246) 0%, rgb(222,222,222) 100%)
+
   &[disabled]
     color: #999
     border-color: #999
@@ -61,6 +66,7 @@ button
   word-break: break-word
   font-size: 12px
   min-height: 12px*4
+  position: relative
   b
     font-weight: normal
     color: $wrongText
@@ -69,11 +75,21 @@ button
   i
     font-style: normal
     color: $hintText
+  .count-hint
+    display: none
   &.focused
     .cursor
       background: $screenBg
       color: $screenText
       animation: 1s blink step-end infinite
+  &.focused
+  &.non-empty
+    .count-hint
+      display: block
+      position: absolute
+      bottom: 3px
+      right: 3px
+      color: $wrongText
 
 // section win
 .section-win

@@ -39,9 +39,9 @@ let text = [
   ' and without any duress or coercion of any form',
   ' exerted by or on behalf of any other organization or individual.'
 ]
-text = [
-  '111111', '2222222'
-]
+// text = [
+//   '111111', '2222222'
+// ]
 const textLengthMap = text.reduce(function(acc, value) {
   const len = value.length
   acc.push(acc.length ? acc[acc.length - 1] + len - 4 : len - 4)
@@ -80,12 +80,13 @@ $('#btn-win').click(function(e) {
 
 // Lose
 const btnLose = $('#btn-lose')
-const minLength = 20
 const textareaLose = new Textarea({
   el: $('#textarea-lose'),
   onChange: function(value) {
-    btnLose.prop('disabled', value.length < minLength)
+    const len = value.length
+    btnLose.prop('disabled', len < this.minLength || len > this.maxLength)
   },
+  minLength: 20,
   maxLength: 255,
 })
 textareaLose.render()

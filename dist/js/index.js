@@ -10369,9 +10369,6 @@ var text = [
     ' and without any duress or coercion of any form',
     ' exerted by or on behalf of any other organization or individual.'
 ];
-text = [
-    '111111', '2222222'
-];
 var textLengthMap = text.reduce(function (acc, value) {
     var len = value.length;
     acc.push(acc.length ? acc[acc.length - 1] + len - 4 : len - 4);
@@ -10409,12 +10406,13 @@ __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function (e) {
     });
 });
 var btnLose = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose');
-var minLength = 20;
 var textareaLose = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-lose'),
     onChange: function (value) {
-        btnLose.prop('disabled', value.length < minLength);
+        var len = value.length;
+        btnLose.prop('disabled', len < this.minLength || len > this.maxLength);
     },
+    minLength: 20,
     maxLength: 255
 });
 textareaLose.render();
@@ -10472,10 +10470,11 @@ doc.on('keydown', function (e) {
 });
 var Textarea = (function () {
     function Textarea(_a) {
-        var el = _a.el, onChange = _a.onChange, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.hint, hint = _c === void 0 ? '' : _c;
+        var el = _a.el, onChange = _a.onChange, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.minLength, minLength = _c === void 0 ? 0 : _c, _d = _a.hint, hint = _d === void 0 ? '' : _d;
         var _this = this;
         this.el = el;
         this.onChange = onChange;
+        this.minLength = minLength;
         this.maxLength = maxLength;
         this.hint = hint;
         this.value = '';
@@ -10526,16 +10525,21 @@ var Textarea = (function () {
         if (inputLen >= originLen) {
             html += '<i class="cursor"> </i>';
         }
-        this.el[0].innerHTML = html;
+        var countHint = '';
+        if (inputLen < this.minLength) {
+            countHint = "<span class=\"count-hint\">+" + (this.minLength - inputLen) + "</span>";
+        }
+        else if (this.maxLength && inputLen > this.maxLength) {
+            countHint = "<span class=\"count-hint\">-" + (inputLen - this.maxLength) + "</span>";
+        }
+        this.el[0].innerHTML = html + countHint;
     };
     Textarea.prototype.handleInput = function (char) {
         if (!this.isFocused) {
             return;
         }
         this.value += char;
-        if (this.maxLength > 0) {
-            this.value = this.value.slice(0, this.maxLength);
-        }
+        this.el.toggleClass('non-empty', this.value.length > 0);
         this.onChange.call(this, this.value);
         this.render();
     };
@@ -10544,6 +10548,7 @@ var Textarea = (function () {
             return;
         }
         this.value = this.value.slice(0, -1);
+        this.el.toggleClass('non-empty', this.value.length > 0);
         this.onChange.call(this, this.value);
         this.render();
     };
