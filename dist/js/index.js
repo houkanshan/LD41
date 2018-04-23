@@ -10396,7 +10396,9 @@ var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]
     hint: getOrigin(0).join('')
 });
 textareaWin.render();
-textareaWin.focus();
+if (Data.isActive) {
+    textareaWin.focus();
+}
 __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function (e) {
     if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).is(':disabled')) {
         return;

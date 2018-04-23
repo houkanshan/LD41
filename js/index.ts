@@ -71,7 +71,9 @@ const textareaWin = new Textarea({
   hint: getOrigin(0).join(''),
 })
 textareaWin.render()
-textareaWin.focus()
+if (Data.isActive) {
+  textareaWin.focus()
+}
 
 $('#btn-win').click(function(e) {
   if ($(e.target).is(':disabled')) { return }

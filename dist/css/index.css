@@ -539,6 +539,11 @@ button[disabled] {
 .banner {
   position: relative;
   width: 683px;
+  margin-bottom: 4px;
+}
+.banner a,
+.banner img {
+  display: block;
 }
 .banner .close {
   display: block;
@@ -553,6 +558,7 @@ button[disabled] {
   position: absolute;
   left: 0;
   bottom: 0;
+  margin-bottom: 0;
 }
 .section-win {
   text-align: center;
