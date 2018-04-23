@@ -507,7 +507,6 @@ button[disabled] {
   min-height: 48px;
   position: relative;
   cursor: text;
-  text-align: justify;
 }
 .textarea b {
   font-weight: normal;
@@ -577,7 +576,7 @@ button[disabled] {
   font-size: 24px;
 }
 #textarea-win.is-expanded {
-  text-align: left;
+  text-align: justify;
 }
 #section-billboard {
   background: #d1d1d1;
