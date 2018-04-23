@@ -439,6 +439,7 @@ body {
   font-size: 12px;
   line-height: 1.3;
   width: 683px;
+  word-break: break-word;
 }
 p {
   margin: 0;
@@ -565,25 +566,77 @@ button[disabled] {
 .section-lose-comment .comment + .comment {
   border-top: 1px solid #333;
 }
-@-webkit-keyframes marquee {
-  from {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
+footer {
+  margin: 4px 3px 0;
+  color: #929292;
 }
-@keyframes marquee {
-  from {
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-  to {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-  }
+footer .left {
+  float: left;
+}
+footer .right {
+  float: right;
+  text-align: right;
+}
+.end-overlay,
+.win-overlay {
+  display: none;
+}
+[data-state='inactive'] .end-overlay {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(187,187,187,0.9);
+}
+[data-state='inactive'] .end-overlay .message {
+  font-size: 22px;
+  line-height: 40px;
+  border: 1px solid #000;
+  background: #fff;
+  width: 342px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+[data-state='win'] .win-overlay {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(187,187,187,0.9);
+}
+[data-state='win'] .win-overlay.cong {
+  background: rgba(255,245,61,0.9);
+  -webkit-animation: 0.2s blink-cong step-end infinite;
+          animation: 0.2s blink-cong step-end infinite;
+}
+[data-state='win'] .win-overlay.cong .cong-message {
+  font-size: 60px;
+  font-size: bold;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+[data-state='win'] .win-overlay .message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 15px;
+  font-size: bold;
+  text-align: center;
 }
 @-webkit-keyframes blink {
   from, to {
@@ -603,5 +656,25 @@ button[disabled] {
   50% {
     background: #fff;
     color: #b9b9b9;
+  }
+}
+@-webkit-keyframes blink-cong {
+  from, to {
+    background: rgba(255,245,61,0.9);
+    color: #000;
+  }
+  50% {
+    background: #000;
+    color: rgba(255,245,61,0.9);
+  }
+}
+@keyframes blink-cong {
+  from, to {
+    background: rgba(255,245,61,0.9);
+    color: #000;
+  }
+  50% {
+    background: #000;
+    color: rgba(255,245,61,0.9);
   }
 }

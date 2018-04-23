@@ -10,7 +10,7 @@ $id = get_id_by_ip($ip);
 if ($id) {
   try {
     choose_to_win($ip);
-    echo "$id";
+    echo get_totals()[1];
   } catch (Exception $e) {
     header(':', true, 500);
   }

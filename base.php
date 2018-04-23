@@ -129,7 +129,7 @@ function choose_to_lose($ip, $comment) {
   $id = $user_info[0];
   $state = $user_info[1];
   if ($state == 0) {
-    update_user($ip, $id, STATE_LOSE, $comment);
+    update_user($ip, $id, STATE_LOSING, $comment);
     file_add_one(FILE_TOTAL);
     file_put_contents(FILE_COMMENTS, "$id,$ip,$comment".PHP_EOL, FILE_APPEND | LOCK_EX);
   }

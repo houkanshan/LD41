@@ -10341,8 +10341,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
 var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
+var body = __WEBPACK_IMPORTED_MODULE_0_jquery__(document.body);
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__marquee__["a" /* renderMarquee */])(__WEBPACK_IMPORTED_MODULE_0_jquery__('#section-billboard p'));
+var startTime = Date.now();
+var timeHandler = null;
+var timeEl = __WEBPACK_IMPORTED_MODULE_0_jquery__('.elapsed');
+function updateElapsed() {
+    var t = ((Date.now() - startTime) / 1000).toFixed(3);
+    timeEl.text(t);
+}
+if (Data.isActive) {
+    setTimeout(function next() {
+        updateElapsed();
+        timeHandler = setTimeout(next, 30);
+    }, 30);
+}
 var text = [
+    "I, as player #" + Data.idStr + ", hereby proclaim that I want to win this game",
+    ', with full awareness of the fact that all games',
+    ' can essentially be divided into two mutually exclusive genres:',
+    ' the ones I want to win and the ones I don’t.',
+    ' This exact game, to me, applies to the former category.',
+    ' Hence, I once again clarify that the aforementioned decision is made out of free will',
+    ' as a voluntary act and deed,',
+    ' under no influence of any chemical substances',
+    ' or peer pressure,',
+    ' and without any duress or coercion of any form',
+    ' exerted by or on behalf of any other organization or individual.'
+];
+text = [
     '111111', '2222222'
 ];
 var textLengthMap = text.reduce(function (acc, value) {
@@ -10377,8 +10404,8 @@ __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function (e) {
     if (!confirm('Is this your final choice?')) {
         return;
     }
-    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win.php').then(function () {
-        renderWin();
+    __WEBPACK_IMPORTED_MODULE_0_jquery__["ajax"]('./choose_to_win.php').then(function (winNumber) {
+        renderWin(winNumber);
     });
 });
 var btnLose = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose');
@@ -10407,7 +10434,12 @@ __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-lose').click(function (e) {
         location.reload();
     });
 });
-function renderWin() {
+function renderWin(winNumber) {
+    clearTimeout(timeHandler);
+    var elapsed = Date.now() - startTime;
+    updateElapsed();
+    __WEBPACK_IMPORTED_MODULE_0_jquery__('.winner-number').text(winNumber);
+    body.attr('data-state', 'win');
 }
 
 
@@ -10536,11 +10568,12 @@ var Textarea = (function () {
 /* harmony export (immutable) */ __webpack_exports__["a"] = renderMarquee;
 function renderMarquee(el) {
     var width = el.outerWidth(true);
-    el.parent().append(el.clone());
+    var _el = el.clone();
+    el.parent().append(_el);
     var currLeft = 0;
-    debugger;
+    var els = el.parent();
     setTimeout(function next() {
-        el.css('margin-left', -currLeft);
+        els.css('transform', "translateX(" + -currLeft + "px)");
         currLeft += 1;
         currLeft %= width;
         setTimeout(next, 20);

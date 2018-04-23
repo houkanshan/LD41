@@ -5,25 +5,41 @@ declare const Data: any;
 
 const doc = $(document)
 const win = $(window)
+const body = $(document.body)
 
 // Billboard
 renderMarquee($('#section-billboard p'))
 
+// Time
+const startTime = Date.now()
+let timeHandler = null
+const timeEl = $('.elapsed')
+function updateElapsed() {
+  const t = ((Date.now() - startTime) / 1000).toFixed(3)
+  timeEl.text(t)
+}
+if (Data.isActive) {
+  setTimeout(function next() {
+    updateElapsed();
+    timeHandler = setTimeout(next, 30)
+  }, 30)
+}
+
 // Win
-// const text = [
-//   `I, as player #${Data.id}, hereby proclaim that I want to win this game`,
-//   ', with full awareness of the fact that all games',
-//   ' can essentially be divided into two mutually exclusive genres:',
-//   ' the ones I want to win and the ones I don’t.',
-//   ' This exact game, to me, applies to the former category.',
-//   ' Hence, I once again clarify that the aforementioned decision is made out of free will',
-//   ' as a voluntary act and deed,',
-//   ' under no influence of any chemical substances',
-//   ' or peer pressure,',
-//   ' and without any duress or coercion of any form',
-//   ' exerted by or on behalf of any other organization or individual.'
-// ]
-const text = [
+let text = [
+  `I, as player #${Data.idStr}, hereby proclaim that I want to win this game`,
+  ', with full awareness of the fact that all games',
+  ' can essentially be divided into two mutually exclusive genres:',
+  ' the ones I want to win and the ones I don’t.',
+  ' This exact game, to me, applies to the former category.',
+  ' Hence, I once again clarify that the aforementioned decision is made out of free will',
+  ' as a voluntary act and deed,',
+  ' under no influence of any chemical substances',
+  ' or peer pressure,',
+  ' and without any duress or coercion of any form',
+  ' exerted by or on behalf of any other organization or individual.'
+]
+text = [
   '111111', '2222222'
 ]
 const textLengthMap = text.reduce(function(acc, value) {
@@ -57,8 +73,8 @@ textareaWin.render()
 $('#btn-win').click(function(e) {
   if ($(e.target).is(':disabled')) { return }
   if (!confirm('Is this your final choice?')) { return }
-  $.ajax('./choose_to_win.php').then(function() {
-    renderWin()
+  $.ajax('./choose_to_win.php').then(function(winNumber) {
+    renderWin(winNumber)
   })
 })
 
@@ -87,6 +103,10 @@ $('#btn-lose').click(function(e) {
   })
 })
 
-function renderWin() {
-
+function renderWin(winNumber) {
+  clearTimeout(timeHandler)
+  const elapsed = Date.now() - startTime
+  updateElapsed();
+  $('.winner-number').text(winNumber)
+  body.attr('data-state', 'win')
 }

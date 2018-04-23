@@ -45,16 +45,24 @@ $comments = get_last_comments(2);
         <button type="button" id="btn-win" disabled>
           I’m ready to confirm my win.</button>
       </div>
+      <div class='end-overlay'>
+        <div class="message">Your Session Has Ended</div>
+      </div>
+      <div class="win-overlay cong">
+        <div class="cong-message">CONGRATULATIONS!</div>
+      </div>
     </td></tr>
 
     <tr class="section-lose"><td>
       <section id="section-billboard">
-        <p>
-          ANNOUNCEMENT: <?php echo $total?> players have played this game so far,
-          among which <?php echo $total_winners?> players have won this game.
-          The latest win was achieved <?php echo formatDateDiff($last_winner_time, $now)?>.
-          Refresh the page to have the statistics updated.
-        </p>
+        <div class="wrapper">
+          <p>
+            ANNOUNCEMENT: <?php echo $total?> players have played this game so far,
+            among which <?php echo $total_winners?> players have won this game.
+            The latest win was achieved <?php echo formatDateDiff($last_winner_time, $now)?>.
+            Refresh the page to have the statistics updated.
+          </p>
+        </div>
       </section>
 
       <div class="section-lose-inner">
@@ -68,6 +76,16 @@ $comments = get_last_comments(2);
         <div class="actions">
           <button type="button" id="btn-lose" disabled>
             I’m confident this is what I’m intended to say.</button>
+        </div>
+        <div class='end-overlay'>
+          <div class="message">Your Session Has Ended</div>
+        </div>
+        <div class="win-overlay">
+          <div class="message">
+            You are the winner #<span class="winner-number"></span>
+            <br>
+            Your completion time is <span class="elapsed">0.000</span>s
+          </div>
         </div>
       </div>
     </td></tr>
@@ -88,6 +106,18 @@ $comments = get_last_comments(2);
       <?php endfor; ?>
     </td></tr>
   </table>
+  <footer>
+    <div class="left">
+      Time Elapsed: <span class="elapsed">0.000</span>s
+      <br/>
+      Player Statues: *<?php echo $is_active ? 'Active' : 'Inactive' ?>
+    </div>
+    <div class="right">
+      Copyright &copy; <?php echo date("Y"); ?> Zerotonin &amp; Houkanshan
+      <br/>
+      Created for The Ludum Dare 41
+    </div>
+  </footer>
 
 </div>
 </div>
@@ -96,7 +126,8 @@ $comments = get_last_comments(2);
 <script>
   var Data = {
     id: '<?php echo $id ?>',
-    idStr: '<?php echo $id_str ?>'
+    idStr: '<?php echo $id_str ?>',
+    isActive: <?php echo $is_active ? 'true' : 'false' ?>
   }
 </script>
 

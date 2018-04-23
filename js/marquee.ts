@@ -1,10 +1,11 @@
 export function renderMarquee(el) {
   const width = el.outerWidth(true)
-  el.parent().append(el.clone())
+  const _el = el.clone()
+  el.parent().append(_el)
   let currLeft = 0
-  debugger
+  const els = el.parent()
   setTimeout(function next() {
-    el.css('margin-left', -currLeft)
+    els.css('transform', `translateX(${-currLeft}px)`)
     currLeft += 1
     currLeft %= width
     setTimeout(next, 20)
