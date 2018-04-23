@@ -506,6 +506,7 @@ button[disabled] {
   font-size: 12px;
   min-height: 48px;
   position: relative;
+  cursor: text;
 }
 .textarea b {
   font-weight: normal;
@@ -573,7 +574,6 @@ button[disabled] {
 }
 #section-billboard {
   background: #d1d1d1;
-  border-bottom: 1px solid #333;
   height: 21px;
   line-height: 21px;
   overflow: hidden;
@@ -623,7 +623,13 @@ footer .right {
   right: 0;
   top: 0;
   bottom: 0;
-  background: rgba(187,187,187,0.9);
+  background-color: rgba(187,187,187,0.9);
+  background-size: 100%;
+  border: 4px solid #000;
+  left: -3px;
+  right: -3px;
+  top: -3px;
+  bottom: -3px;
 }
 [data-state='inactive'] .end-overlay .message {
   font-size: 22px;
@@ -637,6 +643,12 @@ footer .right {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+[data-state='inactive'] .section-win .end-overlay {
+  background-image: url("../../pics/178.png");
+}
+[data-state='inactive'] .section-lose .end-overlay {
+  background-image: url("../../pics/140.png");
 }
 [data-state='win'] .win-overlay {
   display: block;
@@ -660,6 +672,7 @@ footer .right {
   left: 0;
   right: 0;
   top: 50%;
+  font-weight: bold;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
@@ -670,7 +683,7 @@ footer .right {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   font-size: 15px;
-  font-size: bold;
+  font-weight: bold;
   text-align: center;
 }
 @-webkit-keyframes blink {

@@ -40,11 +40,13 @@ let text = [
   ' exerted by or on behalf of any other organization or individual.'
 ]
 // text = [
-//   '111111', '2222222'
+//   '1 1', '2 2'
 // ]
 const textLengthMap = text.reduce(function(acc, value) {
   const len = value.length
-  acc.push(acc.length ? acc[acc.length - 1] + len - 4 : len - 4)
+  const words = value.split(' ')
+  const wordLen = words[words.length - 1].length
+  acc.push(acc.length ? acc[acc.length - 1] + len - wordLen : len - wordLen)
   return acc
 }, [])
 
@@ -69,6 +71,7 @@ const textareaWin = new Textarea({
   hint: getOrigin(0).join(''),
 })
 textareaWin.render()
+textareaWin.focus()
 
 $('#btn-win').click(function(e) {
   if ($(e.target).is(':disabled')) { return }

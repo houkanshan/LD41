@@ -56,17 +56,19 @@ $comments = get_last_comments(2);
       </div>
     </td></tr>
 
-    <tr class="section-lose"><td>
+    <tr><td>
       <section id="section-billboard">
         <div class="wrapper">
           <p>
             ANNOUNCEMENT: <?php echo $total?> players have played this game so far,
             among which <?php echo $total_winners?> players have won this game.
-            The latest win was achieved <?php echo formatDateDiff($last_winner_time, $now)?>.
+            The latest win was achieved <?php echo formatDateDiff($last_winner_time, $now)?> ago.
             Refresh the page to have the statistics updated.
           </p>
         </div>
       </section>
+    </td></tr>
+    <tr class="section-lose"><td>
 
       <div class="section-lose-inner">
         <label>figure 2</label>

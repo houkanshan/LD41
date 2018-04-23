@@ -10371,7 +10371,9 @@ var text = [
 ];
 var textLengthMap = text.reduce(function (acc, value) {
     var len = value.length;
-    acc.push(acc.length ? acc[acc.length - 1] + len - 4 : len - 4);
+    var words = value.split(' ');
+    var wordLen = words[words.length - 1].length;
+    acc.push(acc.length ? acc[acc.length - 1] + len - wordLen : len - wordLen);
     return acc;
 }, []);
 function getOrigin(len) {
@@ -10394,6 +10396,7 @@ var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]
     hint: getOrigin(0).join('')
 });
 textareaWin.render();
+textareaWin.focus();
 __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win').click(function (e) {
     if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).is(':disabled')) {
         return;
