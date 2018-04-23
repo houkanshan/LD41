@@ -111,3 +111,7 @@ function renderWin(winNumber) {
   $('.winner-number').text(winNumber)
   body.attr('data-state', 'win')
 }
+
+$('.close').click(function() {
+  $('.banner').toggleClass('truly-closed')
+})

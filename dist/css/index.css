@@ -535,6 +535,24 @@ button[disabled] {
   right: 3px;
   color: #f00;
 }
+.banner {
+  position: relative;
+  width: 683px;
+}
+.banner .close {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: not-allowed;
+}
+.banner.truly-closed {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
 .section-win {
   text-align: center;
 }

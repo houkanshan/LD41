@@ -33,7 +33,10 @@ $comments = get_last_comments(2);
   <meta name="viewport" content="user-scalable=no, width=540">
 </head>
 <body data-state="<?php echo $is_active ? 'active' : 'inactive' ?>">
-  <div class="banner"></div>
+  <div class="banner">
+    <a href="http://lab.serotoninphobia.info/centrifuge/completeguide.html"><img src="./pics/banner.png" width="100%"></a>
+    <div class="close"></div>
+  </div>
   <table>
     <tr class="section-win"><td>
       <label>figure 1</label>

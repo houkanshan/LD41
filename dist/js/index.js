@@ -10439,6 +10439,9 @@ function renderWin(winNumber) {
     __WEBPACK_IMPORTED_MODULE_0_jquery__('.winner-number').text(winNumber);
     body.attr('data-state', 'win');
 }
+__WEBPACK_IMPORTED_MODULE_0_jquery__('.close').click(function () {
+    __WEBPACK_IMPORTED_MODULE_0_jquery__('.banner').toggleClass('truly-closed');
+});
 
 
 /***/ }),
