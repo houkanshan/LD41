@@ -27,7 +27,7 @@ $comments = get_last_comments(2);
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LD41</title>
+  <title>Winning Condition</title>
   <link rel="stylesheet" href="dist/css/index.css?v=<?php echo VERSION ?>">
   <link rel="shortcut icon" href="http://serotoninphobia.info/favicon.ico">
   <meta name="viewport" content="user-scalable=no, width=540">
@@ -76,7 +76,7 @@ $comments = get_last_comments(2);
         <label>figure 2</label>
         <p class="intro">
           Alternatively. If win is not what you seek,
-          you can also write something here for the future win-seekers to see:
+          you may also write something here for the future win-seekers to see:
         </p>
         <div id="textarea-lose" class="textarea"></div>
 
