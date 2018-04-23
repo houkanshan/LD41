@@ -43,12 +43,12 @@ $comments = get_last_comments(2);
     <tr class="section-win"><td>
       <label>figure 1</label>
       <h1>Winning Condition</h1>
-      <p class="intro">Type in the following line to secure your win.</p>
+      <p class="intro">Type in the following line to claim your win.</p>
       <div id="textarea-win" class="textarea"></div>
 
       <div class="actions">
         <button type="button" id="btn-win" disabled>
-          I’m ready to confirm my win.</button>
+          I’m ready to claim my win.</button>
       </div>
       <div class='end-overlay'>
         <div class="message">Your Session Has Ended</div>
@@ -75,7 +75,7 @@ $comments = get_last_comments(2);
       <div class="section-lose-inner">
         <label>figure 2</label>
         <p class="intro">
-          Alternatively. If win is not what you seek,
+          Alternatively, if win is not what you seek,
           you may also write something here for the future win-seekers to see:
         </p>
         <div id="textarea-lose" class="textarea"></div>
