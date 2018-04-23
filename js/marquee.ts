@@ -5,7 +5,7 @@ export function renderMarquee(el) {
   let currLeft = 0
   const els = el.parent()
   setTimeout(function next() {
-    els.css('transform', `translateX(${-currLeft}px)`)
+    els.css('transform', `translate3d(${-currLeft}px, 0, 0)`)
     currLeft += 1
     currLeft %= width
     setTimeout(next, 20)

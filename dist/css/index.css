@@ -494,19 +494,20 @@ button[disabled] {
 }
 .actions {
   text-align: center;
-  padding: 8px 0;
+  padding: 8px 0 10px;
 }
 .intro {
   margin: 6px 16px;
 }
 .textarea {
-  font-family: monospace;
+  font-family: Georgia, serif;
   white-space: pre-wrap;
   word-break: break-word;
   font-size: 12px;
   min-height: 48px;
   position: relative;
   cursor: text;
+  text-align: justify;
 }
 .textarea b {
   font-weight: normal;

@@ -10514,11 +10514,11 @@ var Textarea = (function () {
                     char = input[i];
                 }
                 else {
-                    if (input[i] === ' ') {
-                        char = "<b class='space'>" + input[i] + "</b>";
+                    if (origin[i] === ' ') {
+                        char = "<b class='space'>" + origin[i] + "</b>";
                     }
                     else {
-                        char = "<b>" + input[i] + "</b>";
+                        char = "<b>" + origin[i] + "</b>";
                     }
                 }
             }
@@ -10586,7 +10586,7 @@ function renderMarquee(el) {
     var currLeft = 0;
     var els = el.parent();
     setTimeout(function next() {
-        els.css('transform', "translateX(" + -currLeft + "px)");
+        els.css('transform', "translate3d(" + -currLeft + "px, 0, 0)");
         currLeft += 1;
         currLeft %= width;
         setTimeout(next, 20);
