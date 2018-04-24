@@ -11,6 +11,8 @@ $state = $user_info[1];
 $comment = $user_info[2];
 $is_active = $state == 0;
 
+$global_id = get_global_id();
+$global_total = $global_id - 1;
 $totals = get_totals();
 $total = $totals[0];
 $total_winners = $totals[1];
@@ -63,7 +65,7 @@ $comments = get_last_comments(2);
       <section id="section-billboard">
         <div class="wrapper">
           <p>
-            ANNOUNCEMENT: <?php echo $total?> players have played this game so far,
+            ANNOUNCEMENT: <?php echo $global_total ?> players have played this game so far,
             among which <?php echo $total_winners?> players have won this game.
             The latest win was achieved <?php echo formatDateDiff($last_winner_time, $now)?> ago.
             Refresh the page to have the statistics updated.

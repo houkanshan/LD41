@@ -135,6 +135,10 @@ function choose_to_lose($ip, $comment) {
   }
 }
 
+function get_global_id() {
+  return intval(safe_get_contents(FILE_GLOBAL_ID));
+}
+
 function get_totals() {
   $total = intval(safe_get_contents(FILE_TOTAL));
   $total_win = intval(safe_get_contents(FILE_TOTAL_WIN));
