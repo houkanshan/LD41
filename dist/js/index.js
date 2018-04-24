@@ -10387,13 +10387,15 @@ function getOrigin(len) {
     return text;
 }
 var btnWin = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win');
+var countWrong = __WEBPACK_IMPORTED_MODULE_0_jquery__('#count-wrong');
 var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-win'),
-    onChange: function (value) {
+    onChange: function (value, wrongCount) {
         var texts = getOrigin(value.length);
         this.el.toggleClass('is-expanded', texts.length > 1);
         this.setHint(texts.join(''));
         btnWin.prop('disabled', value !== this.hint);
+        countWrong.toggle(wrongCount !== 0).text(wrongCount + " error" + (wrongCount > 1 ? 's' : ''));
     },
     hint: getOrigin(0).join('')
 });
@@ -10490,6 +10492,7 @@ var Textarea = (function () {
         this.value = '';
         this.isFocused = false;
         textareas.push(this);
+        this.wrongCount = 0;
         doc.on('click', function (e) {
             if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).closest(_this.el).length) {
                 _this.focus();
@@ -10509,6 +10512,7 @@ var Textarea = (function () {
         var inputLen = input.length;
         var originLen = origin.length;
         var len = Math.max(inputLen, originLen);
+        var wrongCount = 0;
         for (var i = 0; i < len; i++) {
             var char = '';
             if (i < inputLen) {
@@ -10516,6 +10520,7 @@ var Textarea = (function () {
                     char = input[i];
                 }
                 else {
+                    wrongCount += 1;
                     if (origin[i] === ' ') {
                         char = "<b class='space'>" + origin[i] + "</b>";
                     }
@@ -10535,6 +10540,7 @@ var Textarea = (function () {
         if (inputLen >= originLen) {
             html += '<i class="cursor"> </i>';
         }
+        this.wrongCount = wrongCount;
         var countHint = '';
         if (inputLen < this.minLength) {
             countHint = "<span class=\"count-hint\">+" + (this.minLength - inputLen) + "</span>";
@@ -10550,7 +10556,7 @@ var Textarea = (function () {
         }
         this.value += char;
         this.el.toggleClass('non-empty', this.value.length > 0);
-        this.onChange.call(this, this.value);
+        this.onChange.call(this, this.value, this.wrongCount);
         this.render();
     };
     Textarea.prototype.handleDelete = function () {
@@ -10559,7 +10565,7 @@ var Textarea = (function () {
         }
         this.value = this.value.slice(0, -1);
         this.el.toggleClass('non-empty', this.value.length > 0);
-        this.onChange.call(this, this.value);
+        this.onChange.call(this, this.value, this.wrongCount);
         this.render();
     };
     Textarea.prototype.focus = function () {

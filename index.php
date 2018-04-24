@@ -49,6 +49,7 @@ $comments = get_last_comments(2);
       <div class="actions">
         <button type="button" id="btn-win" disabled>
           I’m ready to claim my win.</button>
+        <span id="count-wrong"></span>
       </div>
       <div class='end-overlay'>
         <div class="message">Your Session Has Ended</div>

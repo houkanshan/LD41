@@ -62,13 +62,15 @@ function getOrigin(len) : string[] {
 }
 
 const btnWin = $('#btn-win')
+const countWrong = $('#count-wrong')
 const textareaWin = new Textarea({
   el: $('#textarea-win'),
-  onChange: function(value) {
+  onChange: function(value, wrongCount) {
     const texts = getOrigin(value.length)
     this.el.toggleClass('is-expanded', texts.length > 1)
     this.setHint(texts.join(''))
     btnWin.prop('disabled', value !== this.hint)
+    countWrong.toggle(wrongCount !== 0).text(`${wrongCount} error${wrongCount > 1 ? 's' : ''}`)
   },
   hint: getOrigin(0).join(''),
 })

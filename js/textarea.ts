@@ -29,6 +29,7 @@ class Textarea {
   minLength: number
   maxLength: number
   isFocused: boolean
+  wrongCount: number
 
   constructor({ el, onChange, maxLength = 0, minLength = 0, hint = '' }) {
     this.el = el
@@ -39,6 +40,7 @@ class Textarea {
     this.value = ''
     this.isFocused = false
     textareas.push(this)
+    this.wrongCount = 0
 
     doc.on('click', (e) => {
       if ($(e.target).closest(this.el).length) {
@@ -60,12 +62,14 @@ class Textarea {
     const inputLen = input.length
     const originLen = origin.length
     const len = Math.max(inputLen, originLen)
+    let wrongCount = 0
     for (let i = 0; i < len; i++) {
       let char = ''
       if (i < inputLen) {
         if (originLen === 0 || input[i] === origin[i]) {
           char = input[i]
         } else {
+          wrongCount += 1
           if (origin[i] === ' ') {
             char = `<b class='space'>${origin[i]}</b>`
           } else {
@@ -83,6 +87,8 @@ class Textarea {
       html += '<i class="cursor"> </i>'
     }
 
+    this.wrongCount = wrongCount
+
 
     let countHint = ''
     if (inputLen < this.minLength) {
@@ -98,14 +104,14 @@ class Textarea {
     if (!this.isFocused) { return }
     this.value += char
     this.el.toggleClass('non-empty', this.value.length > 0)
-    this.onChange.call(this, this.value)
+    this.onChange.call(this, this.value, this.wrongCount)
     this.render()
   }
   handleDelete() {
     if (!this.isFocused) { return }
     this.value = this.value.slice(0, -1)
     this.el.toggleClass('non-empty', this.value.length > 0)
-    this.onChange.call(this, this.value)
+    this.onChange.call(this, this.value, this.wrongCount)
     this.render()
   }
 
