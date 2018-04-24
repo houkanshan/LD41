@@ -10335,14 +10335,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__textarea__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__marquee__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__typewriter_effect__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__marquee__ = __webpack_require__(3);
+
 
 
 
 var doc = __WEBPACK_IMPORTED_MODULE_0_jquery__(document);
 var win = __WEBPACK_IMPORTED_MODULE_0_jquery__(window);
 var body = __WEBPACK_IMPORTED_MODULE_0_jquery__(document.body);
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__marquee__["a" /* renderMarquee */])(__WEBPACK_IMPORTED_MODULE_0_jquery__('#section-billboard p'));
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__marquee__["a" /* renderMarquee */])(__WEBPACK_IMPORTED_MODULE_0_jquery__('#section-billboard p'));
 var startTime = Date.now();
 var timeHandler = null;
 var timeEl = __WEBPACK_IMPORTED_MODULE_0_jquery__('.elapsed');
@@ -10350,12 +10352,10 @@ function updateElapsed() {
     var t = ((Date.now() - startTime) / 1000).toFixed(3);
     timeEl.text(t);
 }
-if (Data.isActive) {
-    setTimeout(function next() {
-        updateElapsed();
-        timeHandler = setTimeout(next, 30);
-    }, 30);
-}
+setTimeout(function next() {
+    updateElapsed();
+    timeHandler = setTimeout(next, 30);
+}, 30);
 var text = [
     "I, as player #" + Data.id + ", hereby proclaim that I want to win this game",
     ', with full awareness of the fact that all games',
@@ -10386,14 +10386,19 @@ function getOrigin(len) {
     }
     return text;
 }
+var typewriter = new __WEBPACK_IMPORTED_MODULE_2__typewriter_effect__["a" /* default */]('#textarea-win');
 var btnWin = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win');
 var countWrong = __WEBPACK_IMPORTED_MODULE_0_jquery__('#count-wrong');
 var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-win'),
     onChange: function (value, wrongCount) {
         var texts = getOrigin(value.length);
-        this.el.toggleClass('is-expanded', texts.length > 1);
+        var newHint = texts.join('');
+        if (newHint > this.hint) {
+            typewriter.startTyping(this.hint.length, texts[texts.length - 1]);
+        }
         this.setHint(texts.join(''));
+        this.el.toggleClass('is-expanded', texts.length > 1);
         btnWin.prop('disabled', value !== this.hint);
         countWrong.toggle(wrongCount !== 0).text(wrongCount + " error" + (wrongCount > 1 ? 's' : ''));
     },
@@ -10450,7 +10455,7 @@ function renderWin(winNumber) {
     body.attr('data-state', 'win');
 }
 __WEBPACK_IMPORTED_MODULE_0_jquery__('.close').click(function () {
-    __WEBPACK_IMPORTED_MODULE_0_jquery__('.banner').toggleClass('truly-closed');
+    __WEBPACK_IMPORTED_MODULE_0_jquery__('.banner').toggle();
 });
 
 
@@ -10526,7 +10531,7 @@ var Textarea = (function () {
                         char = "<b class='space'>" + origin[i] + "</b>";
                     }
                     else {
-                        char = "<b>" + origin[i] + "</b>";
+                        char = "<b>" + (origin[i] || input[i]) + "</b>";
                     }
                 }
             }
@@ -10588,19 +10593,98 @@ var Textarea = (function () {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = renderMarquee;
+(function () {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
+            || window[vendors[x] + 'CancelRequestAnimationFrame'];
+    }
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function (callback) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function () { callback(currTime + timeToCall); }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function (id) {
+            clearTimeout(id);
+        };
+}());
 function renderMarquee(el) {
     var width = el.outerWidth(true);
     var _el = el.clone();
     el.parent().append(_el);
     var currLeft = 0;
     var els = el.parent();
-    setTimeout(function next() {
-        els.css('transform', "translate3d(" + -currLeft + "px, 0, 0)");
-        currLeft += 1;
-        currLeft %= width;
-        setTimeout(next, 20);
-    }, 20);
+    var lastTime = null;
+    requestAnimationFrame(function next(time) {
+        if (lastTime) {
+            currLeft += (time - lastTime) / 20;
+            currLeft %= width;
+            els.css('transform', "translate3d(" + -currLeft + "px, 0, 0)");
+        }
+        lastTime = time;
+        requestAnimationFrame(next);
+    });
 }
+
+
+/***/ }),
+/* 4 */,
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+
+var head = __WEBPACK_IMPORTED_MODULE_0_jquery__(document.head);
+var TypewriterEffect = (function () {
+    function TypewriterEffect(selector) {
+        this.start = 0;
+        this.end = 0;
+        this.text = '';
+        this.cursor = 0;
+        this.styleEl = __WEBPACK_IMPORTED_MODULE_0_jquery__('<style>');
+        this.selector = selector;
+        head.append(this.styleEl);
+    }
+    TypewriterEffect.prototype.startTyping = function (start, text) {
+        var _this = this;
+        this.start = start;
+        this.end = start + text.length;
+        this.text = text;
+        this.cursor = 0;
+        clearTimeout(this.timer);
+        var typeNext = function () {
+            _this.cursor += 1;
+            var currChar = text[_this.cursor];
+            _this.styleEl.text(_this.selector + " > :nth-child(n+" + (_this.cursor + 1 + _this.start) + ") { opacity: 0; }");
+            if (_this.cursor < _this.end - 1) {
+                var delayTime = 30;
+                switch (currChar) {
+                    case ' ':
+                        delayTime = 60;
+                        break;
+                    case ',':
+                        delayTime = 100;
+                        break;
+                    case '.':
+                        delayTime = 200;
+                        break;
+                }
+                _this.timer = setTimeout(typeNext, Math.random() * 30 + delayTime);
+            }
+        };
+        typeNext();
+    };
+    return TypewriterEffect;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (TypewriterEffect);
 
 
 /***/ })

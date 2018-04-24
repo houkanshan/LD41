@@ -73,7 +73,7 @@ class Textarea {
           if (origin[i] === ' ') {
             char = `<b class='space'>${origin[i]}</b>`
           } else {
-            char = `<b>${origin[i]}</b>`
+            char = `<b>${origin[i] || input[i]}</b>`
           }
         }
       } else if (i === inputLen) {

@@ -1,7 +1,7 @@
 <?php include "base.php"; ?>
 
 <?php
-define("VERSION", 8);
+define("VERSION", 9);
 
 $ip = get_ip();
 $user_info = get_or_create_user_info($ip);
@@ -114,6 +114,12 @@ $comments = get_last_comments(2);
       <?php endfor; ?>
     </td></tr>
   </table>
+  <div class="banner" style="display: none; margin-top: 3px">
+    <a target="_blank" href="http://lab.serotoninphobia.info/centrifuge/completeguide.html">
+      <img src="./pics/banner.png" width="683px" height="84px">
+      </a>
+    <div class="close"></div>
+  </div>
   <footer>
     <div class="left">
       Time Elapsed: <span class="elapsed">0.000</span>s
