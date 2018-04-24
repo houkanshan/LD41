@@ -1,5 +1,6 @@
 import * as $ from 'jquery'
 import Textarea from './textarea'
+import TypewriterEffect from './typewriter-effect'
 import { renderMarquee } from './marquee'
 declare const Data: any;
 
@@ -18,12 +19,10 @@ function updateElapsed() {
   const t = ((Date.now() - startTime) / 1000).toFixed(3)
   timeEl.text(t)
 }
-if (Data.isActive) {
-  setTimeout(function next() {
-    updateElapsed();
-    timeHandler = setTimeout(next, 30)
-  }, 30)
-}
+setTimeout(function next() {
+  updateElapsed();
+  timeHandler = setTimeout(next, 30)
+}, 30)
 
 // Win
 let text = [
@@ -61,14 +60,21 @@ function getOrigin(len) : string[] {
   return text
 }
 
+const typewriter = new TypewriterEffect('#textarea-win')
+
 const btnWin = $('#btn-win')
 const countWrong = $('#count-wrong')
 const textareaWin = new Textarea({
   el: $('#textarea-win'),
   onChange: function(value, wrongCount) {
     const texts = getOrigin(value.length)
-    this.el.toggleClass('is-expanded', texts.length > 1)
+    const newHint = texts.join('')
+    if (newHint > this.hint) {
+      typewriter.startTyping(this.hint.length, texts[texts.length - 1])
+    }
     this.setHint(texts.join(''))
+
+    this.el.toggleClass('is-expanded', texts.length > 1)
     btnWin.prop('disabled', value !== this.hint)
     countWrong.toggle(wrongCount !== 0).text(`${wrongCount} error${wrongCount > 1 ? 's' : ''}`)
   },

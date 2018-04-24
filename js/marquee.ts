@@ -22,6 +22,7 @@
             clearTimeout(id);
         };
 }());
+
 export function renderMarquee(el) {
   const width = el.outerWidth(true)
   const _el = el.clone()
