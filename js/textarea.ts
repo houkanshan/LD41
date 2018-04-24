@@ -32,10 +32,13 @@ class Textarea {
   isFocused: boolean
   wrongCount: number
 
-  constructor({ el, onChange, afterRender, maxLength = 0, minLength = 0, hint = '', value = '' }) {
+  constructor({
+    el, onChange, afterRender = function() {},
+    maxLength = 0, minLength = 0, hint = '', value = ''
+  }) {
     this.el = el
     this.onChange = onChange
-    this.afterRender = afterRender || function() {}
+    this.afterRender = afterRender
     this.minLength = minLength
     this.maxLength = maxLength
     this.hint = hint

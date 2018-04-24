@@ -589,6 +589,10 @@ button[disabled] {
 #textarea-win.is-expanded {
   text-align: justify;
 }
+#textarea-win:hover:not(.focused) .cursor {
+  background: #b9b9b9;
+  color: #fff;
+}
 #section-billboard {
   background: #d1d1d1;
   height: 21px;

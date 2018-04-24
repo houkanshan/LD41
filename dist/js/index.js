@@ -10491,11 +10491,11 @@ doc.on('keydown', function (e) {
 });
 var Textarea = (function () {
     function Textarea(_a) {
-        var el = _a.el, onChange = _a.onChange, afterRender = _a.afterRender, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.minLength, minLength = _c === void 0 ? 0 : _c, _d = _a.hint, hint = _d === void 0 ? '' : _d, _e = _a.value, value = _e === void 0 ? '' : _e;
+        var el = _a.el, onChange = _a.onChange, _b = _a.afterRender, afterRender = _b === void 0 ? function () { } : _b, _c = _a.maxLength, maxLength = _c === void 0 ? 0 : _c, _d = _a.minLength, minLength = _d === void 0 ? 0 : _d, _e = _a.hint, hint = _e === void 0 ? '' : _e, _f = _a.value, value = _f === void 0 ? '' : _f;
         var _this = this;
         this.el = el;
         this.onChange = onChange;
-        this.afterRender = afterRender || function () { };
+        this.afterRender = afterRender;
         this.minLength = minLength;
         this.maxLength = maxLength;
         this.hint = hint;
