@@ -10360,7 +10360,7 @@ var text = [
     "I, as player #" + Data.idStr + ", hereby proclaim that I want to win this game",
     ', with full awareness of the fact that all games',
     ' can essentially be divided into two mutually exclusive genres:',
-    ' the ones I want to win and the ones I don’t.',
+    ' the ones I want to win and the ones I don\'t.',
     ' This exact game, to me, applies to the former category.',
     ' Hence, I once again clarify that the aforementioned decision is made out of free will',
     ' as a voluntary act and deed,',
@@ -10371,15 +10371,17 @@ var text = [
 ];
 var textLengthMap = text.reduce(function (acc, value) {
     var len = value.length;
-    var words = value.split(' ');
-    var wordLen = words[words.length - 1].length;
-    acc.push(acc.length ? acc[acc.length - 1] + len - wordLen : len - wordLen);
+    acc.push(acc.length ? acc[acc.length - 1] + len : len);
     return acc;
 }, []);
 function getOrigin(len) {
     for (var i = 0, ilen = text.length; i < ilen; i++) {
         if (textLengthMap[i] > len) {
-            return text.slice(0, i + 1);
+            var words = text[i].split(' ');
+            var wordLen = words[words.length - 1].length;
+            if (textLengthMap[i] > len + wordLen) {
+                return text.slice(0, i + 1);
+            }
         }
     }
     return text;
