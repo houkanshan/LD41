@@ -10369,9 +10369,6 @@ var text = [
     ' and without any duress or coercion of any form',
     ' exerted by or on behalf of any other organization or individual.'
 ];
-text = [
-    '1 1', '2 2'
-];
 var textLengthMap = text.reduce(function (acc, value) {
     var len = value.length;
     acc.push(acc.length ? acc[acc.length - 1] + len : len);
@@ -10581,6 +10578,7 @@ var Textarea = (function () {
         this.el.toggleClass('non-empty', this.value.length > 0);
         this.onChange.call(this, this.value, this.wrongCount);
         this.render();
+        this.afterRender.call(this);
     };
     Textarea.prototype.focus = function () {
         this.isFocused = true;

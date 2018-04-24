@@ -1,7 +1,7 @@
 <?php include "base.php"; ?>
 
 <?php
-define("VERSION", 10);
+define("VERSION", 14);
 
 $ip = get_ip();
 $user_info = get_or_create_user_info($ip);

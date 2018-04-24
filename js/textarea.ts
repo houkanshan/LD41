@@ -116,6 +116,7 @@ class Textarea {
     this.el.toggleClass('non-empty', this.value.length > 0)
     this.onChange.call(this, this.value, this.wrongCount)
     this.render()
+    this.afterRender.call(this)
   }
 
   focus() {
