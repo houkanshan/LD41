@@ -649,7 +649,7 @@ footer .right {
   bottom: 0;
   background-color: rgba(187,187,187,0.9);
   background-size: 100% 100%;
-  border: 4px solid #000;
+  border: 3px solid #000;
   left: -3px;
   right: -3px;
   top: -3px;
@@ -696,11 +696,12 @@ footer .right {
 [data-state='win'] .win-overlay .message {
   position: absolute;
   font-family: Tahoma, Geneva, sans-serif;
+  font-weight: bold;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  font-size: 15px;
+  font-size: 18px;
   text-align: center;
 }
 @-webkit-keyframes blink {
