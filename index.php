@@ -12,7 +12,7 @@ $comment = $user_info[2];
 $is_active = $state == 0;
 
 $global_id = get_global_id();
-$global_total = $global_id - 1;
+$global_total = $global_id;
 $totals = get_totals();
 $total = $totals[0];
 $total_winners = $totals[1];
