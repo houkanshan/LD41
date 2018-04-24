@@ -10357,7 +10357,7 @@ if (Data.isActive) {
     }, 30);
 }
 var text = [
-    "I, as player #" + Data.idStr + ", hereby proclaim that I want to win this game",
+    "I, as player #" + Data.id + ", hereby proclaim that I want to win this game",
     ', with full awareness of the fact that all games',
     ' can essentially be divided into two mutually exclusive genres:',
     ' the ones I want to win and the ones I don\'t.',
@@ -10397,6 +10397,7 @@ var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]
         btnWin.prop('disabled', value !== this.hint);
         countWrong.toggle(wrongCount !== 0).text(wrongCount + " error" + (wrongCount > 1 ? 's' : ''));
     },
+    value: 'I, as player ',
     hint: getOrigin(0).join('')
 });
 textareaWin.render();
@@ -10482,14 +10483,14 @@ doc.on('keydown', function (e) {
 });
 var Textarea = (function () {
     function Textarea(_a) {
-        var el = _a.el, onChange = _a.onChange, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.minLength, minLength = _c === void 0 ? 0 : _c, _d = _a.hint, hint = _d === void 0 ? '' : _d;
+        var el = _a.el, onChange = _a.onChange, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.minLength, minLength = _c === void 0 ? 0 : _c, _d = _a.hint, hint = _d === void 0 ? '' : _d, _e = _a.value, value = _e === void 0 ? '' : _e;
         var _this = this;
         this.el = el;
         this.onChange = onChange;
         this.minLength = minLength;
         this.maxLength = maxLength;
         this.hint = hint;
-        this.value = '';
+        this.value = value;
         this.isFocused = false;
         textareas.push(this);
         this.wrongCount = 0;
@@ -10517,7 +10518,7 @@ var Textarea = (function () {
             var char = '';
             if (i < inputLen) {
                 if (originLen === 0 || input[i] === origin[i]) {
-                    char = input[i];
+                    char = "<span>" + input[i] + "</span>";
                 }
                 else {
                     wrongCount += 1;

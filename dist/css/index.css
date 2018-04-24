@@ -516,6 +516,7 @@ button[disabled] {
   cursor: text;
 }
 .textarea b {
+  font-style: normal;
   font-weight: normal;
   color: #f00;
   text-decoration: underline;
@@ -525,6 +526,7 @@ button[disabled] {
 }
 .textarea i {
   font-style: normal;
+  font-weight: normal;
   color: #b9b9b9;
 }
 .textarea .count-hint {
@@ -548,6 +550,7 @@ button[disabled] {
   position: relative;
   width: 683px;
   margin-bottom: 4px;
+  z-index: 10;
 }
 .banner a,
 .banner img {
@@ -597,6 +600,7 @@ button[disabled] {
 #section-billboard p {
   margin-left: 40px;
   display: inline;
+  will-change: transform;
 }
 .section-lose-inner {
   padding-top: 14px;
@@ -626,6 +630,12 @@ footer .right {
   float: right;
   text-align: right;
 }
+.footnote {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #929292;
+}
 .end-overlay,
 .win-overlay {
   display: none;
@@ -648,8 +658,7 @@ footer .right {
 [data-state='inactive'] .end-overlay .message {
   font-size: 22px;
   line-height: 40px;
-  border: 1px solid #000;
-  background: #fff;
+  font-family: "Arial Black", Gadget, sans-serif;
   width: 342px;
   text-align: center;
   position: absolute;
@@ -657,12 +666,6 @@ footer .right {
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-}
-[data-state='inactive'] .section-win .end-overlay {
-  background-image: url("../../pics/178.png");
-}
-[data-state='inactive'] .section-lose .end-overlay {
-  background-image: url("../../pics/140.png");
 }
 [data-state='win'] .win-overlay {
   display: block;
@@ -679,10 +682,10 @@ footer .right {
           animation: 0.2s blink-cong step-end infinite;
 }
 [data-state='win'] .win-overlay.cong .cong-message {
-  font-size: 60px;
-  font-size: bold;
+  font-size: 54px;
   position: absolute;
   text-align: center;
+  font-family: "Arial Black", Gadget, sans-serif;
   left: 0;
   right: 0;
   top: 50%;
@@ -692,12 +695,12 @@ footer .right {
 }
 [data-state='win'] .win-overlay .message {
   position: absolute;
+  font-family: Tahoma, Geneva, sans-serif;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   font-size: 15px;
-  font-weight: bold;
   text-align: center;
 }
 @-webkit-keyframes blink {

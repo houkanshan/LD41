@@ -31,13 +31,13 @@ class Textarea {
   isFocused: boolean
   wrongCount: number
 
-  constructor({ el, onChange, maxLength = 0, minLength = 0, hint = '' }) {
+  constructor({ el, onChange, maxLength = 0, minLength = 0, hint = '', value = '' }) {
     this.el = el
     this.onChange = onChange
     this.minLength = minLength
     this.maxLength = maxLength
     this.hint = hint
-    this.value = ''
+    this.value = value
     this.isFocused = false
     textareas.push(this)
     this.wrongCount = 0
@@ -67,7 +67,7 @@ class Textarea {
       let char = ''
       if (i < inputLen) {
         if (originLen === 0 || input[i] === origin[i]) {
-          char = input[i]
+          char = `<span>${input[i]}</span>`
         } else {
           wrongCount += 1
           if (origin[i] === ' ') {

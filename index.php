@@ -1,7 +1,7 @@
 <?php include "base.php"; ?>
 
 <?php
-define("VERSION", 7);
+define("VERSION", 8);
 
 $ip = get_ip();
 $user_info = get_or_create_user_info($ip);
@@ -109,7 +109,7 @@ $comments = get_last_comments(2);
         ?>
         <section class="comment">
           <label>figure 3-<?php echo $i == 0 ? 'a' : 'b' ?></label>
-          Player #<?php echo formatId($_id) ?> (<?php echo formatIp($_ip) ?>) Said: "<?php echo $_comment ?>"
+          Player #<?php echo $_id ?> (<?php echo formatIp($_ip) ?>) Said: "<?php echo $_comment ?>"
         </section>
       <?php endfor; ?>
     </td></tr>
@@ -119,14 +119,16 @@ $comments = get_last_comments(2);
       Time Elapsed: <span class="elapsed">0.000</span>s
       <br/>
       Player Statues: *<?php echo $is_active ? 'Active' : 'Inactive' ?>
-      <br/>
-      * This game is read-only for inactive players.
     </div>
     <div class="right">
       Copyright &copy; <?php echo date("Y"); ?> Zerotonin &amp; Houkanshan<br/>
       Created for The Ludum Dare 41
     </div>
   </footer>
+
+  <div class="footnote">
+    * This game is read-only for inactive players.
+  </div>
 
 </div>
 </div>

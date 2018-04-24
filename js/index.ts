@@ -27,7 +27,7 @@ if (Data.isActive) {
 
 // Win
 let text = [
-  `I, as player #${Data.idStr}, hereby proclaim that I want to win this game`,
+  `I, as player #${Data.id}, hereby proclaim that I want to win this game`,
   ', with full awareness of the fact that all games',
   ' can essentially be divided into two mutually exclusive genres:',
   ' the ones I want to win and the ones I don\'t.',
@@ -72,6 +72,7 @@ const textareaWin = new Textarea({
     btnWin.prop('disabled', value !== this.hint)
     countWrong.toggle(wrongCount !== 0).text(`${wrongCount} error${wrongCount > 1 ? 's' : ''}`)
   },
+  value: 'I, as player ',
   hint: getOrigin(0).join(''),
 })
 textareaWin.render()
