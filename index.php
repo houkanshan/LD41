@@ -118,10 +118,11 @@ $comments = get_last_comments(2);
       Time Elapsed: <span class="elapsed">0.000</span>s
       <br/>
       Player Statues: *<?php echo $is_active ? 'Active' : 'Inactive' ?>
+      <br/>
+      * This game is read-only for inactive players.
     </div>
     <div class="right">
-      Copyright &copy; <?php echo date("Y"); ?> Zerotonin &amp; Houkanshan
-      <br/>
+      Copyright &copy; <?php echo date("Y"); ?> Zerotonin &amp; Houkanshan<br/>
       Created for The Ludum Dare 41
     </div>
   </footer>

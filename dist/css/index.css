@@ -511,6 +511,7 @@ button[disabled] {
 .textarea b {
   font-weight: normal;
   color: #f00;
+  text-decoration: underline;
 }
 .textarea b.space {
   background: #f00;
