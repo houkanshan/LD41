@@ -20,13 +20,13 @@ $last_winner = get_last_winner();
 
   <p>Your state: <?php echo join(',', get_or_create_user_info($ip)); ?></p>
 
-  <p>Last comments are:
+  <!-- <p>Last comments are:
     <ul>
       <li>
         <?php echo join('</li><li>', get_last_comments(2)); ?>
       </li>
     </ul>
-  </p>
+  </p> -->
   <p>
     Choose to win:
     <form action="choose_to_win.php" method="post">
@@ -41,6 +41,6 @@ $last_winner = get_last_winner();
     </form>
   </p>
 
-  <?php phpinfo() ?>
+  <?php /* phpinfo() */ ?>
 </body>
 </html>
