@@ -131,7 +131,8 @@ function choose_to_lose($ip, $comment) {
   if ($state == 0) {
     update_user($ip, $id, STATE_LOSING, $comment);
     file_add_one(FILE_TOTAL);
-    file_put_contents(FILE_COMMENTS, "$id,$ip,$comment".PHP_EOL, FILE_APPEND | LOCK_EX);
+    $time = time();
+    file_put_contents(FILE_COMMENTS, "$id,$ip,$time,$comment".PHP_EOL, FILE_APPEND | LOCK_EX);
   }
 }
 

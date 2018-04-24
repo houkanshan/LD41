@@ -104,14 +104,16 @@ $comments = get_last_comments(2);
       <?php for($i = 0; $i < 2; $i++): ?>
         <?php
           $comment = $comments[$i];
-          $_data = explode(',', $comment, 3);
+          $_data = explode(',', $comment, 4);
           $_id = $_data[0];
           $_ip = $_data[1];
-          $_comment = $_data[2];
+          $_time = date(DATE_RFC2822, $_data[2]);
+          $_comment = $_data[3];
         ?>
         <section class="comment">
           <label>figure 3-<?php echo $i == 0 ? 'a' : 'b' ?></label>
-          <b>Player #<?php echo $_id ?> (<?php echo formatIp($_ip) ?>) Said:</b> "<?php echo $_comment ?>"
+          <b>Player #<?php echo $_id ?> (<?php echo formatIp($_ip) ?>) Said On <?php echo $_time ?>:</b>
+          <br><?php echo $_comment ?>
         </section>
       <?php endfor; ?>
     </td></tr>
