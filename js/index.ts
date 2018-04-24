@@ -129,5 +129,5 @@ function renderWin(winNumber) {
 }
 
 $('.close').click(function() {
-  $('.banner').toggleClass('truly-closed')
+  $('.banner').toggle()
 })
