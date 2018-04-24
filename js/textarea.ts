@@ -48,9 +48,10 @@ class Textarea {
     this.wrongCount = 0
 
     doc.on('click', (e) => {
+      const target = $(e.target)
       if ($(e.target).closest(this.el).length) {
         this.focus()
-      } else {
+      } else if (target.closest('.textarea, button').length) {
         this.blur()
       }
     })

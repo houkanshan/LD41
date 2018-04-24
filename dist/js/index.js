@@ -10504,10 +10504,11 @@ var Textarea = (function () {
         textareas.push(this);
         this.wrongCount = 0;
         doc.on('click', function (e) {
+            var target = __WEBPACK_IMPORTED_MODULE_0_jquery__(e.target);
             if (__WEBPACK_IMPORTED_MODULE_0_jquery__(e.target).closest(_this.el).length) {
                 _this.focus();
             }
-            else {
+            else if (target.closest('.textarea, button').length) {
                 _this.blur();
             }
         });
