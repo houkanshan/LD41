@@ -1,7 +1,7 @@
 <?php include "base.php"; ?>
 
 <?php
-define("VERSION", 9);
+define("VERSION", 10);
 
 $ip = get_ip();
 $user_info = get_or_create_user_info($ip);
@@ -111,7 +111,7 @@ $comments = get_last_comments(2);
         ?>
         <section class="comment">
           <label>figure 3-<?php echo $i == 0 ? 'a' : 'b' ?></label>
-          Player #<?php echo $_id ?> (<?php echo formatIp($_ip) ?>) Said: "<?php echo $_comment ?>"
+          <b>Player #<?php echo $_id ?> (<?php echo formatIp($_ip) ?>) Said:</b> "<?php echo $_comment ?>"
         </section>
       <?php endfor; ?>
     </td></tr>

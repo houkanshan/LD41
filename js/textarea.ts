@@ -24,6 +24,7 @@ doc.on('keydown', function(e) {
 class Textarea {
   el: JQuery
   onChange: (string) => void
+  afterRender: (string) => void
   hint: string
   value: string
   minLength: number
@@ -31,9 +32,10 @@ class Textarea {
   isFocused: boolean
   wrongCount: number
 
-  constructor({ el, onChange, maxLength = 0, minLength = 0, hint = '', value = '' }) {
+  constructor({ el, onChange, afterRender, maxLength = 0, minLength = 0, hint = '', value = '' }) {
     this.el = el
     this.onChange = onChange
+    this.afterRender = afterRender || function() {}
     this.minLength = minLength
     this.maxLength = maxLength
     this.hint = hint
@@ -104,8 +106,9 @@ class Textarea {
     if (!this.isFocused) { return }
     this.value += char
     this.el.toggleClass('non-empty', this.value.length > 0)
-    this.onChange.call(this, this.value, this.wrongCount)
+    this.onChange.call(this, this.value)
     this.render()
+    this.afterRender.call(this)
   }
   handleDelete() {
     if (!this.isFocused) { return }

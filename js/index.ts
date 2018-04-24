@@ -38,9 +38,9 @@ let text = [
   ' and without any duress or coercion of any form',
   ' exerted by or on behalf of any other organization or individual.'
 ]
-// text = [
-//   '1 1', '2 2'
-// ]
+text = [
+  '1 1', '2 2'
+]
 const textLengthMap = text.reduce(function(acc, value) {
   const len = value.length
   acc.push(acc.length ? acc[acc.length - 1] + len  : len )
@@ -66,7 +66,7 @@ const btnWin = $('#btn-win')
 const countWrong = $('#count-wrong')
 const textareaWin = new Textarea({
   el: $('#textarea-win'),
-  onChange: function(value, wrongCount) {
+  onChange: function(value) {
     const texts = getOrigin(value.length)
     const newHint = texts.join('')
     if (newHint > this.hint) {
@@ -76,6 +76,9 @@ const textareaWin = new Textarea({
 
     this.el.toggleClass('is-expanded', texts.length > 1)
     btnWin.prop('disabled', value !== this.hint)
+  },
+  afterRender() {
+    const wrongCount = this.wrongCount
     countWrong.toggle(wrongCount !== 0).text(`${wrongCount} error${wrongCount > 1 ? 's' : ''}`)
   },
   value: 'I, as player ',

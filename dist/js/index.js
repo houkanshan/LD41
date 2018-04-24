@@ -10369,6 +10369,9 @@ var text = [
     ' and without any duress or coercion of any form',
     ' exerted by or on behalf of any other organization or individual.'
 ];
+text = [
+    '1 1', '2 2'
+];
 var textLengthMap = text.reduce(function (acc, value) {
     var len = value.length;
     acc.push(acc.length ? acc[acc.length - 1] + len : len);
@@ -10391,7 +10394,7 @@ var btnWin = __WEBPACK_IMPORTED_MODULE_0_jquery__('#btn-win');
 var countWrong = __WEBPACK_IMPORTED_MODULE_0_jquery__('#count-wrong');
 var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]({
     el: __WEBPACK_IMPORTED_MODULE_0_jquery__('#textarea-win'),
-    onChange: function (value, wrongCount) {
+    onChange: function (value) {
         var texts = getOrigin(value.length);
         var newHint = texts.join('');
         if (newHint > this.hint) {
@@ -10400,6 +10403,9 @@ var textareaWin = new __WEBPACK_IMPORTED_MODULE_1__textarea__["a" /* default */]
         this.setHint(texts.join(''));
         this.el.toggleClass('is-expanded', texts.length > 1);
         btnWin.prop('disabled', value !== this.hint);
+    },
+    afterRender: function () {
+        var wrongCount = this.wrongCount;
         countWrong.toggle(wrongCount !== 0).text(wrongCount + " error" + (wrongCount > 1 ? 's' : ''));
     },
     value: 'I, as player ',
@@ -10488,10 +10494,11 @@ doc.on('keydown', function (e) {
 });
 var Textarea = (function () {
     function Textarea(_a) {
-        var el = _a.el, onChange = _a.onChange, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.minLength, minLength = _c === void 0 ? 0 : _c, _d = _a.hint, hint = _d === void 0 ? '' : _d, _e = _a.value, value = _e === void 0 ? '' : _e;
+        var el = _a.el, onChange = _a.onChange, afterRender = _a.afterRender, _b = _a.maxLength, maxLength = _b === void 0 ? 0 : _b, _c = _a.minLength, minLength = _c === void 0 ? 0 : _c, _d = _a.hint, hint = _d === void 0 ? '' : _d, _e = _a.value, value = _e === void 0 ? '' : _e;
         var _this = this;
         this.el = el;
         this.onChange = onChange;
+        this.afterRender = afterRender || function () { };
         this.minLength = minLength;
         this.maxLength = maxLength;
         this.hint = hint;
@@ -10562,8 +10569,9 @@ var Textarea = (function () {
         }
         this.value += char;
         this.el.toggleClass('non-empty', this.value.length > 0);
-        this.onChange.call(this, this.value, this.wrongCount);
+        this.onChange.call(this, this.value);
         this.render();
+        this.afterRender.call(this);
     };
     Textarea.prototype.handleDelete = function () {
         if (!this.isFocused) {
