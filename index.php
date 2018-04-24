@@ -52,7 +52,7 @@ $comments = get_last_comments(2);
         <span id="count-wrong"></span>
       </div>
       <div class='end-overlay'>
-        <div class="message">Your Session Has Ended</div>
+        <div class="message">Your Session Has Expired</div>
       </div>
       <div class="win-overlay cong">
         <div class="cong-message">CONGRATULATIONS!</div>
