@@ -1,7 +1,7 @@
 <?php include "base.php"; ?>
 
 <?php
-define("VERSION", 17);
+define("VERSION", 18);
 
 $ip = get_ip();
 $user_info = get_or_create_user_info($ip);
@@ -65,7 +65,7 @@ $comments = get_last_comments(2);
       <section id="section-billboard">
         <div class="wrapper">
           <p>
-            ANNOUNCEMENT: <?php echo $global_total ?> players have played this game so far,
+            FOR YOUR INFORMATION: <?php echo $global_total ?> players have played this game thus far,
             among which <?php echo $total_winners?> players have won this game.
             The latest win was achieved <?php echo formatDateDiff($last_winner_time, $now)?> ago.
             Refresh the page to have the statistics updated.
