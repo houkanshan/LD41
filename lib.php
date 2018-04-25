@@ -76,7 +76,7 @@ function formatDateDiff($_start, $_end=null) {
   }
   if($interval->s !== 0) {
       if(!count($format)) {
-          return "less than a minute ago";
+          return "less than a minute";
       } else {
           $format[] = "%s ".$doPlural($interval->s, "second");
       }
