@@ -1,7 +1,7 @@
 <?php include "base.php"; ?>
 
 <?php
-define("VERSION", 18);
+define("VERSION", 19);
 
 $ip = get_ip();
 $user_info = get_or_create_user_info($ip);
@@ -85,7 +85,7 @@ $comments = get_last_comments(2);
 
         <div class="actions">
           <button type="button" id="btn-lose" disabled>
-            I’m confident this is what I’m intended to say.</button>
+            I’m confident this is what I intend to say.</button>
         </div>
         <div class='end-overlay'>
           <div class="message">Your Session Has Expired</div>
