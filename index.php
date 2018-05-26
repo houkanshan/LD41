@@ -37,7 +37,7 @@ $comments = get_last_comments(2);
 <body data-state="<?php echo $is_active ? 'active' : 'inactive' ?>">
   <div class="banner">
     <a target="_blank" href="http://lab.serotoninphobia.info/centrifuge/completeguide.html">
-      <img src="./pics/banner.png" width="683px" height="84px">
+      <img src="./pics/banner.jpg" width="683px" height="84px">
       </a>
     <div class="close"></div>
   </div>
@@ -120,7 +120,7 @@ $comments = get_last_comments(2);
   </table>
   <div class="banner" style="display: none; margin-top: 3px">
     <a target="_blank" href="http://lab.serotoninphobia.info/centrifuge/completeguide.html">
-      <img src="./pics/banner.png" width="683px" height="84px">
+      <img src="./pics/banner.jpg" width="683px" height="84px">
       </a>
     <div class="close"></div>
   </div>
