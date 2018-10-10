@@ -113,7 +113,7 @@ $comments = get_last_comments(2);
         <section class="comment">
           <label>figure 3-<?php echo $i == 0 ? 'a' : 'b' ?></label>
           <b>Player #<?php echo $_id ?> (<?php echo formatIp($_ip) ?>) Said On <?php echo $_time ?>:</b>
-          <br><?php echo $_comment ?>
+          <br><?php echo htmlspecialchars($_comment) ?>
         </section>
       <?php endfor; ?>
     </td></tr>
